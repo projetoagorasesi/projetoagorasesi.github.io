@@ -27,7 +27,7 @@ jobs:
       - name: Gerar o site
         run: npm run build
         env:
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          NEXT_PUBLIC_BASE_PATH: ${{ !endsWith(github.event.repository.name, '.github.io') && format('/{0}', github.event.repository.name) || '' }}
           NEXT_TELEMETRY_DISABLED: 1
       - run: touch out/.nojekyll
       - uses: actions/upload-pages-artifact@v3

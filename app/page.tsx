@@ -5,6 +5,8 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import ArquivoImg from "@/components/ArquivoImg"
 import AntesDepois from "@/components/AntesDepois"
+import CartaoPesquisa from "@/components/CartaoPesquisa"
+import { usePesquisas } from "@/components/FiltroPesquisa"
 import { Selo, Vazio } from "@/components/Secao"
 import { asset, dataBR, TIPOS_ATUALIZACAO } from "@/lib/util"
 import { useColecao, porOrdem, porDataDesc } from "@/lib/useColecao"
@@ -13,22 +15,22 @@ import type { Referencia, Imagem, Atualizacao, Integrante, Artigo } from "@/lib/
 
 const EIXOS = [
   {
-    icone: "fa-building-columns",
+    icone: "fa-magnifying-glass",
     cor: "teal",
-    titulo: "Patrimônio material",
-    texto: "Igrejas, sobrados, pontes e ruas: o que foi demolido, o que resistiu e o que mudou de uso.",
+    titulo: "Pesquisa com fontes",
+    texto: "Livros, teses, documentos de acervo, fotografias e depoimentos, sempre citados e com a origem indicada.",
+  },
+  {
+    icone: "fa-building-columns",
+    cor: "copper",
+    titulo: "Patrimônio e memória",
+    texto: "O que a cidade guardou, o que perdeu e o que essas mudanças significaram para quem vivia nela.",
   },
   {
     icone: "fa-people-group",
-    cor: "copper",
-    titulo: "Memória de quem viveu",
-    texto: "Quem morava, trabalhava e passeava no bairro, e como as reformas mexeram com a vida dessas pessoas.",
-  },
-  {
-    icone: "fa-map-location-dot",
     cor: "teal",
-    titulo: "Urbanização em fases",
-    texto: "De 1910 a 1940, uma grande reforma com anos de demolições intensas, anos mais calmos e muitas continuidades.",
+    titulo: "Conhecimento aberto",
+    texto: "Artigos, imagens e o diário das nossas ações publicados aqui, para quem quiser aprender com a gente.",
   },
 ]
 
@@ -72,6 +74,7 @@ const RECURSOS = [
 ]
 
 export default function Inicio() {
+  const pesquisas = usePesquisas()
   const refs = useColecao<Referencia>("referencias", REFERENCIAS, porOrdem)
   const imgs = useColecao<Imagem>("imagens", IMAGENS, porOrdem)
   const acoes = useColecao<Atualizacao>("atualizacoes", ATUALIZACOES, porDataDesc)
@@ -98,36 +101,35 @@ export default function Inicio() {
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-32 pb-20 text-center">
           <span className="selo bg-aged-copper/20 border border-aged-copper/40 text-aged-copper">
-            PROGRAMA ÁGORA · SESI CIÊNCIA NA RUA 2026
+            INICIAÇÃO CIENTÍFICA · ESCOLA SESI IBURA
           </span>
-          <h1 className="font-poppins font-bold text-4xl sm:text-5xl md:text-7xl text-white mt-6 mb-6 leading-tight text-balance">
-            Santo Antônio
-            <br />
-            em transformação
+          <h1 className="font-poppins font-bold text-5xl sm:text-6xl md:text-7xl text-white mt-6 mb-6 leading-tight text-balance">
+            Projeto Ágora
           </h1>
           <p className="text-lg md:text-2xl text-sand-beige max-w-3xl mx-auto mb-10 text-pretty">
-            Como o bairro de Santo Antônio, no Recife, mudou entre <strong className="text-white">1910 e 1940</strong>,
-            e o que essas mudanças significaram para quem vivia nele?
+            Estudantes pesquisando a <strong className="text-white">história, a memória e o patrimônio</strong> do Recife,
+            e abrindo para todo mundo o que descobrem.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/artigos/" className="btn-teal text-lg px-8 py-4 shadow-lg hover:scale-105">
+            <Link href="/pesquisas/" className="btn-teal text-lg px-8 py-4 shadow-lg hover:scale-105">
+              <i className="fas fa-flask"></i>Conhecer as pesquisas
+            </Link>
+            <Link href="/artigos/" className="btn-copper text-lg px-8 py-4 shadow-lg hover:scale-105">
               <i className="fas fa-file-lines"></i>Ler nossos artigos
             </Link>
-            <Link href="/galeria/" className="btn-copper text-lg px-8 py-4 shadow-lg hover:scale-105">
-              <i className="fas fa-images"></i>Ver a galeria
-            </Link>
           </div>
-          <div className="mt-16 flex items-center justify-center gap-6 sm:gap-12">
+          <div className="mt-16 flex items-center justify-center gap-5 sm:gap-12">
             {[
+              { n: pesquisas.length, r: pesquisas.length === 1 ? "Pesquisa" : "Pesquisas" },
               { n: refs.itens.length, r: "Referências" },
               { n: imgs.itens.length, r: "Imagens" },
               { n: acoes.itens.length + artigos.itens.length, r: "Ações e textos" },
             ].map((s, i) => (
-              <div key={s.r} className="flex items-center gap-6 sm:gap-12">
+              <div key={s.r} className="flex items-center gap-5 sm:gap-12">
                 {i > 0 && <div className="h-12 w-px bg-aged-copper/40"></div>}
                 <div className="text-center">
                   <div className="font-poppins font-bold text-3xl sm:text-4xl text-white mb-1">{s.n}</div>
-                  <div className="text-sand-beige text-sm">{s.r}</div>
+                  <div className="text-sand-beige text-xs sm:text-sm">{s.r}</div>
                 </div>
               </div>
             ))}
@@ -135,19 +137,19 @@ export default function Inicio() {
         </div>
       </section>
 
-      {/* A pergunta */}
+      {/* O projeto */}
       <section className="py-24 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <Selo>A PERGUNTA DO PROJETO</Selo>
+              <Selo>O PROJETO</Selo>
               <h2 className="font-poppins font-bold text-4xl md:text-5xl text-soil-brown mb-6 leading-tight text-balance">
-                Uma cidade que se reinventa, e o que fica pelo caminho
+                A cidade como sala de aula
               </h2>
               <p className="text-lg text-text-secondary mb-8 leading-relaxed">
-                No começo do século XX, o Recife quis ser moderno: abriu avenidas, alargou ruas e derrubou prédios
-                antigos. Nós, estudantes da Escola SESI Ibura, investigamos o que essa reforma fez com o bairro de Santo
-                Antônio, usando bibliografia, fotografias de época, documentos de acervo e a observação dos lugares.
+                No Projeto Ágora, estudantes da Escola SESI Ibura, da Rede SESI Pernambuco, fazem perguntas sobre o
+                Recife e vão atrás das respostas como pesquisadores: lendo bibliografia, consultando acervos, analisando
+                imagens antigas e observando os lugares. Este site reúne o que produzimos e o que consultamos.
               </p>
               <div className="space-y-6">
                 {EIXOS.map((e) => (
@@ -185,11 +187,32 @@ export default function Inicio() {
         </div>
       </section>
 
+      {/* Pesquisas */}
+      <section className="py-24 bg-gradient-to-br from-sand-beige to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-14">
+            <Selo cor="copper">NOSSAS PESQUISAS</Selo>
+            <h2 className="font-poppins font-bold text-4xl md:text-5xl text-soil-brown mb-6 text-balance">Uma pergunta de cada vez</h2>
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto">Cada pesquisa tem seus artigos, imagens, referências e diário.</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-8 [&>*]:w-full sm:[&>*]:w-[360px]">
+            {pesquisas.map((p) => (
+              <CartaoPesquisa key={p.id} p={p} />
+            ))}
+            <div className="cartao p-8 flex flex-col items-center justify-center text-center border-2 border-dashed border-aged-copper/30 bg-white/60 shadow-none min-h-[300px]">
+              <i className="fas fa-seedling text-aged-copper text-4xl mb-4"></i>
+              <h3 className="font-poppins font-bold text-xl mb-2">Novas pesquisas a caminho</h3>
+              <p className="text-text-secondary text-sm">Quando um novo grupo começar a investigar, ele aparece aqui.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Ontem e hoje */}
       <section className="py-24 bg-soil-brown">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <span className="selo bg-aged-copper/20 text-aged-copper mb-6">ONTEM E HOJE</span>
+            <span className="selo bg-aged-copper/20 text-aged-copper mb-6">PESQUISA EM DESTAQUE · SANTO ANTÔNIO</span>
             <h2 className="font-poppins font-bold text-4xl md:text-5xl text-white mt-6 mb-4 text-balance">
               A Avenida Guararapes, 1940 e 2015
             </h2>
@@ -366,7 +389,7 @@ export default function Inicio() {
               <div>
                 <h3 className="font-poppins font-bold text-3xl text-soil-brown mb-2">Tem uma história do bairro?</h3>
                 <p className="text-text-secondary">
-                  Fotos de família, lembranças de quem morou ou trabalhou em Santo Antônio, dúvidas e sugestões: fale com a gente.
+                  Fotos de família, lembranças de quem morou ou trabalhou no centro do Recife, dúvidas e sugestões: fale com a gente.
                 </p>
               </div>
               <div className="flex gap-4 shrink-0">

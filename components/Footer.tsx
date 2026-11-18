@@ -11,13 +11,13 @@ export default function Footer() {
               <span className="font-poppins font-bold text-2xl">ÁGORA</span>
             </div>
             <p className="text-sand-beige text-sm leading-relaxed">
-              Pesquisa sobre as transformações do bairro de Santo Antônio, no Recife, entre 1910 e 1940. Escola SESI
-              Ibura · SESI Ciência na Rua 2026.
+              Projeto de iniciação científica da Escola SESI Ibura, com pesquisas sobre a história e o patrimônio do Recife.
             </p>
           </div>
           <div>
             <h4 className="font-poppins font-semibold text-lg mb-4">Pesquisa</h4>
             <ul className="space-y-2 text-sand-beige text-sm">
+              <li><Link href="/pesquisas/" className="hover:text-aged-copper transition-colors">Nossas pesquisas</Link></li>
               <li><Link href="/artigos/" className="hover:text-aged-copper transition-colors">Nossos artigos</Link></li>
               <li><Link href="/referencias/" className="hover:text-aged-copper transition-colors">Referências</Link></li>
               <li><Link href="/galeria/" className="hover:text-aged-copper transition-colors">Galeria de imagens</Link></li>
@@ -41,7 +41,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="pt-8 border-t border-white/10 text-center text-sand-beige text-sm space-y-2">
-          <p>© 2026 Projeto ÁGORA · Escola SESI Ibura. Textos da equipe; imagens com créditos aos autores e acervos.</p>
+          <p>© 2026 Projeto Ágora · Escola SESI Ibura. Textos da equipe; imagens com créditos aos autores e acervos.</p>
         </div>
       </div>
     </footer>

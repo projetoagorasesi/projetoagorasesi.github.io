@@ -5,10 +5,11 @@ import { useEffect, useState } from "react"
 
 const LINKS = [
   { href: "/", rotulo: "Início", id: "inicio" },
+  { href: "/pesquisas/", rotulo: "Pesquisas", id: "pesquisas" },
   { href: "/artigos/", rotulo: "Artigos", id: "artigos" },
   { href: "/referencias/", rotulo: "Referências", id: "referencias" },
   { href: "/galeria/", rotulo: "Galeria", id: "galeria" },
-  { href: "/diario/", rotulo: "Diário de ações", id: "diario" },
+  { href: "/diario/", rotulo: "Diário", id: "diario" },
   { href: "/integrantes/", rotulo: "Integrantes", id: "integrantes" },
 ]
 
@@ -37,7 +38,7 @@ export default function Header({ pagina, transparente = false }: { pagina?: stri
             <i className="fas fa-landmark text-aged-copper text-2xl"></i>
             <span className="font-poppins font-bold text-2xl text-white">ÁGORA</span>
             <span className="hidden sm:inline text-sand-beige text-sm font-medium border-l border-white/20 pl-2 ml-1">
-              Santo Antônio
+              SESI Ibura
             </span>
           </Link>
           <div className="hidden xl:flex items-center gap-7">

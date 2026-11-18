@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import FiltroPesquisa from "@/components/FiltroPesquisa"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import PageHero from "@/components/PageHero"
@@ -12,10 +13,11 @@ import type { Imagem } from "@/lib/tipos"
 export default function Galeria() {
   const { itens } = useColecao<Imagem>("imagens", IMAGENS, porOrdem)
   const [cat, setCat] = useState("")
+  const [pesq, setPesq] = useState("")
   const [aberta, setAberta] = useState<number | null>(null)
 
   const categorias = [...new Set(itens.map((i) => i.categoria).filter(Boolean))] as string[]
-  const lista = itens.filter((i) => !cat || i.categoria === cat)
+  const lista = itens.filter((i) => !pesq || i.pesquisa === pesq).filter((i) => !cat || i.categoria === cat)
   const atual = aberta !== null ? lista[aberta] : null
 
   useEffect(() => {
@@ -40,6 +42,7 @@ export default function Galeria() {
       />
       <section className="py-16 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <FiltroPesquisa valor={pesq} onChange={setPesq} />
           <div className="flex flex-wrap gap-3 justify-center mb-12">
             {["", ...categorias].map((c) => (
               <button

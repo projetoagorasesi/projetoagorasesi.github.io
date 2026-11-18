@@ -1,9 +1,10 @@
 // Dados iniciais: aparecem enquanto a nuvem estiver vazia e podem ser importados pelo Painel.
-import type { Referencia, Imagem, Integrante, Artigo, Atualizacao } from './tipos'
+import type { Referencia, Imagem, Integrante, Artigo, Atualizacao, Pesquisa } from './tipos'
 
 export const REFERENCIAS: Referencia[] = [
  {
   "id": "ref-01",
+  "pesquisa": "santo-antonio",
   "abnt": "ASSUNÇÃO, Gabriela Lira; DANTAS, George Alexandre Ferreira. Demolitions, debates and preservation attempts: approaches based on the cases of Salvador and Recife (1910-1930). urbe: Revista Brasileira de Gestão Urbana, Curitiba, v. 10, n. 2, p. 387-399, maio/ago. 2018.",
   "link": "https://doi.org/10.1590/2175-3369.010.002.AO05",
   "tema": "Demolições e preservação",
@@ -12,6 +13,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-02",
+  "pesquisa": "santo-antonio",
   "abnt": "CANÁRIO, Tiago. Sobre viagens cotidianas: a construção do espaço urbano a partir da figura do flâneur e sua retórica da caminhada.",
   "link": null,
   "tema": "Cidade e caminhada",
@@ -20,6 +22,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-03",
+  "pesquisa": "santo-antonio",
   "abnt": "CARLOS, Ana Fani Alessandri. O lugar no/do mundo. São Paulo: LABUR Edições, 2007. Edição eletrônica.",
   "link": "https://gesp.fflch.usp.br/sites/gesp.fflch.usp.br/files/O_lugar_no_do_mundo.pdf",
   "tema": "Teoria do lugar",
@@ -28,6 +31,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-04",
+  "pesquisa": "santo-antonio",
   "abnt": "CORRÊA, Roberto Lobato. O espaço urbano. São Paulo: Ática, 1989.",
   "link": null,
   "tema": "Teoria do espaço urbano",
@@ -36,6 +40,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-05",
+  "pesquisa": "santo-antonio",
   "abnt": "CORRÊA, Roberto Lobato. Processos, formas e interações espaciais. Revista Brasileira de Geografia, Rio de Janeiro, v. 61, n. 1, p. 127-134, jan./jun. 2016.",
   "link": null,
   "tema": "Teoria do espaço urbano",
@@ -44,6 +49,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-06",
+  "pesquisa": "santo-antonio",
   "abnt": "CORREIA, Telma de Barros. Urbanismo e política: Recife, 1930-1950. Risco: Revista de Pesquisa em Arquitetura e Urbanismo, São Carlos, n. 2, p. 88-90.",
   "link": "https://revistas.usp.br/risco/article/download/44623/48242/53164",
   "tema": "Urbanismo 1930-1950",
@@ -52,6 +58,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-07",
+  "pesquisa": "santo-antonio",
   "abnt": "COSTA, Thais Santos; FELIX NETO, Antonio Severino; SÁ CARNEIRO, Ana Rita; PEREIRA, Larissa Maria Sotero. Do monumento à ruína: Santo Antônio como um bairro-jardim no Recife. Anais do Museu Paulista: História e Cultura Material, São Paulo, v. 31, p. 1-22, e37, 2023.",
   "link": "https://doi.org/10.11606/1982-02672023v31e37",
   "tema": "Bairro de Santo Antônio",
@@ -60,6 +67,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-08",
+  "pesquisa": "santo-antonio",
   "abnt": "COUCEIRO, Sylvia Costa. Artes de viver a cidade: conflitos e convivências nos espaços de diversão e prazer do Recife nos anos 1920. 2003. Tese (Doutorado em História) – Programa de Pós-Graduação em História, Universidade Federal de Pernambuco, Recife, 2003.",
   "link": null,
   "tema": "Cotidiano e sociabilidade, anos 1920",
@@ -68,6 +76,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-09",
+  "pesquisa": "santo-antonio",
   "abnt": "GAMA, António; SANTOS, Norberto Pinto dos. Espaços de sociabilidade. Revista Crítica / Em Questão: As Cidades, out./nov. 1997.",
   "link": "https://www.researchgate.net/publication/239988674",
   "tema": "Sociabilidade",
@@ -76,6 +85,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-10",
+  "pesquisa": "santo-antonio",
   "abnt": "MOURA, Carlos André Silva de. Os antigos cafés do Recife: a sociabilidade na capital pernambucana (1920-1937). Resgate: Revista Interdisciplinar de Cultura, Campinas, v. 20, n. 23, p. 97-107, jan./jun. 2012.",
   "link": "https://periodicos.sbu.unicamp.br/ojs/index.php/resgate/article/view/8645732",
   "tema": "Cafés e sociabilidade",
@@ -84,6 +94,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-11",
+  "pesquisa": "santo-antonio",
   "abnt": "NASCIMENTO, Luís Domingues. Intervenções urbanas na cidade do Recife: uma igreja no meio do caminho de uma avenida. Revista Brasileira de História & Ciências Sociais, Rio Grande, v. 7, n. 13, p. 138-160, jul. 2015.",
   "link": "https://doi.org/10.14295/rbhcs.v7i13.257",
   "tema": "Av. Dantas Barreto e Igreja dos Martírios",
@@ -92,6 +103,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-12",
+  "pesquisa": "santo-antonio",
   "abnt": "NEVES, Marcos Alessandro. Higienismo e ações de remodelamento urbano no Recife (1900-1929). Saúde e Meio Ambiente, v. 31, n. 48, p. 50-59, jun. 2018.",
   "link": "https://doi.org/10.22562/2018.48.05",
   "tema": "Higienismo e reforma urbana",
@@ -100,6 +112,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-13",
+  "pesquisa": "santo-antonio",
   "abnt": "PONTUAL, Virgínia. Tempos do Recife: representações culturais e configurações urbanas. Revista Brasileira de História, São Paulo, v. 21, n. 42, p. 417-434, 2001.",
   "link": "https://scielo.br/j/rbh/a/xGZft5mx9VpjDNs7WPxZtcr/",
   "tema": "Representações do Recife",
@@ -108,6 +121,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-14",
+  "pesquisa": "santo-antonio",
   "abnt": "PONTUAL, Virgínia; PEREIRA, Juliana Melo. As práticas do urbanismo modernista e da conservação urbana na cidade do Recife: dilemas, confrontos e o Plano de Gabaritos de 1965. Oculum Ensaios, Campinas, n. 13, p. 98-111, 2011.",
   "link": null,
   "tema": "Urbanismo modernista",
@@ -116,6 +130,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-15",
+  "pesquisa": "santo-antonio",
   "abnt": "VASCONCELOS, Sandro; GIRÃO, Osvaldo. Como a Amsterdã brasileira deu lugar a uma Paris tropical: as transformações estruturais na cidade do Recife e seu espólio patrimonial contemporâneo. Fênix: Revista de História e Estudos Culturais, v. 11, ano 11, n. 1, jan./jun. 2014.",
   "link": "https://revistafenix.pro.br/revistafenix/article/download/551/523/1072",
   "tema": "Transformações do Recife",
@@ -124,6 +139,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-16",
+  "pesquisa": "santo-antonio",
   "abnt": "[Autor a confirmar]. \"Se fazia preciso nessa cidade, um ponto de recreio, agradável e ao alcance de todas as bolsas\": os primeiros anos do cinema no Recife.",
   "link": null,
   "tema": "Cinema e sociabilidade",
@@ -132,6 +148,7 @@ export const REFERENCIAS: Referencia[] = [
  },
  {
   "id": "ref-17",
+  "pesquisa": "santo-antonio",
   "abnt": "Da cidade Maurícia ao Bairro de Santo Antônio.",
   "link": null,
   "tema": "Bairro de Santo Antônio",
@@ -143,6 +160,7 @@ export const REFERENCIAS: Referencia[] = [
 export const IMAGENS: Imagem[] = [
  {
   "id": "img-01",
+  "pesquisa": "santo-antonio",
   "titulo": "Bairro de Santo Antônio em 1880",
   "autor": "Benício Dias (reprodução)",
   "ano": "1880",
@@ -154,6 +172,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-02",
+  "pesquisa": "santo-antonio",
   "titulo": "Igreja Matriz do Corpo Santo",
   "autor": "Litogravura (reprodução de Benício Dias)",
   "ano": "séc. XIX",
@@ -165,6 +184,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-03",
+  "pesquisa": "santo-antonio",
   "titulo": "Ponte da Boa Vista",
   "autor": "Benício Dias (reprodução)",
   "ano": "1900",
@@ -176,6 +196,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-04",
+  "pesquisa": "santo-antonio",
   "titulo": "Ponte Buarque de Macedo",
   "autor": "Ramiro M. Costa & Filhos",
   "ano": "1902",
@@ -187,6 +208,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-05",
+  "pesquisa": "santo-antonio",
   "titulo": "Bairro de Santo Antônio em 1911",
   "autor": "Benício Dias (reprodução)",
   "ano": "1911",
@@ -198,6 +220,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-06",
+  "pesquisa": "santo-antonio",
   "titulo": "Demolição da Igreja Matriz do Corpo Santo",
   "autor": "Autoria a confirmar",
   "ano": "1911",
@@ -209,6 +232,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-07",
+  "pesquisa": "santo-antonio",
   "titulo": "Aterro e expansão do cais do Recife",
   "autor": "Autoria a confirmar",
   "ano": "1911",
@@ -220,6 +244,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-08",
+  "pesquisa": "santo-antonio",
   "titulo": "Demolição e construção na área do Marco Zero",
   "autor": "Benício Dias (reprodução)",
   "ano": "1912",
@@ -231,6 +256,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-09",
+  "pesquisa": "santo-antonio",
   "titulo": "Vista da Avenida Guararapes",
   "autor": "Sérgio Benício Dias",
   "ano": "1940",
@@ -242,6 +268,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-10",
+  "pesquisa": "santo-antonio",
   "titulo": "Avenida Guararapes em cartão-postal",
   "autor": "Josebias Bandeira",
   "ano": "1950",
@@ -253,6 +280,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-11",
+  "pesquisa": "santo-antonio",
   "titulo": "Avenida Dantas Barreto, vista aérea",
   "autor": "Autoria a confirmar",
   "ano": "data a confirmar",
@@ -264,6 +292,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-12",
+  "pesquisa": "santo-antonio",
   "titulo": "Avenida Dantas Barreto, vista aérea (P&B)",
   "autor": "Autoria a confirmar",
   "ano": "data a confirmar",
@@ -275,6 +304,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-13",
+  "pesquisa": "santo-antonio",
   "titulo": "Centro do Recife em 2014",
   "autor": "Fabrício Macedo",
   "ano": "2014",
@@ -286,6 +316,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-14",
+  "pesquisa": "santo-antonio",
   "titulo": "Avenida Guararapes em 2015",
   "autor": "Carlos Ezequiel",
   "ano": "2015",
@@ -297,6 +328,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-15",
+  "pesquisa": "santo-antonio",
   "titulo": "Rua Conde da Boa Vista",
   "autor": "Benício Dias (reprodução)",
   "ano": "1930",
@@ -308,6 +340,7 @@ export const IMAGENS: Imagem[] = [
  },
  {
   "id": "img-16",
+  "pesquisa": "santo-antonio",
   "titulo": "Forte Frederik Hendrik",
   "autor": "Frans Post",
   "ano": "1640",
@@ -361,3 +394,17 @@ export const INTEGRANTES: Integrante[] = [
 export const ARTIGOS: Artigo[] = []
 
 export const ATUALIZACOES: Atualizacao[] = []
+
+export const PESQUISAS: Pesquisa[] = [
+ {
+  "id": "santo-antonio",
+  "titulo": "Santo Antônio em transformação",
+  "subtitulo": "O bairro de Santo Antônio, no Recife, entre 1910 e 1940",
+  "pergunta": "Como o bairro de Santo Antônio, no Recife, mudou entre 1910 e 1940, e o que essas mudanças significaram para quem vivia nele?",
+  "resumo": "No começo do século XX, o Recife quis ser moderno: abriu avenidas, alargou ruas e derrubou prédios antigos. A pesquisa investiga o que essa reforma fez com o bairro de Santo Antônio, usando bibliografia, fotografias de época, documentos de acervo e a observação dos lugares.",
+  "periodo": "1910–1940",
+  "capa_url": "/galeria/09_Vista_Av_Guararapes_1940_Sergio_Benicio_Dias.jpg",
+  "situacao": "em andamento",
+  "ordem": 1
+ }
+]

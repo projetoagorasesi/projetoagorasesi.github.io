@@ -1,5 +1,18 @@
+export type Pesquisa = {
+  id: string
+  titulo: string
+  subtitulo: string | null
+  pergunta: string | null
+  resumo: string | null
+  periodo: string | null
+  capa_url: string | null
+  situacao: string | null // em andamento | concluida
+  ordem: number
+}
+
 export type Artigo = {
   id: string
+  pesquisa?: string | null
   titulo: string
   autores: string
   resumo: string
@@ -10,6 +23,7 @@ export type Artigo = {
 }
 export type Referencia = {
   id: string
+  pesquisa?: string | null
   abnt: string
   link: string | null
   tema: string | null
@@ -18,6 +32,7 @@ export type Referencia = {
 }
 export type Imagem = {
   id: string
+  pesquisa?: string | null
   titulo: string
   autor: string | null
   ano: string | null
@@ -29,6 +44,7 @@ export type Imagem = {
 }
 export type Atualizacao = {
   id: string
+  pesquisa?: string | null
   titulo: string
   tipo: string // visita | pesquisa | debate | evento | oficina
   data: string | null

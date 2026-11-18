@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import FiltroPesquisa from "@/components/FiltroPesquisa"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import PageHero from "@/components/PageHero"
@@ -14,9 +15,11 @@ export default function Referencias() {
   const { itens } = useColecao<Referencia>("referencias", REFERENCIAS, porOrdem)
   const [busca, setBusca] = useState("")
   const [tema, setTema] = useState("")
+  const [pesq, setPesq] = useState("")
 
   const temas = useMemo(() => [...new Set(itens.map((r) => r.tema).filter(Boolean))].sort() as string[], [itens])
   const lista = itens
+    .filter((r) => !pesq || r.pesquisa === pesq)
     .filter((r) => !tema || r.tema === tema)
     .filter((r) => !busca || sem(`${r.abnt} ${r.tema || ""}`).includes(sem(busca)))
     .sort((a, b) => sem(a.abnt).localeCompare(sem(b.abnt)))
@@ -32,6 +35,7 @@ export default function Referencias() {
       />
       <section className="py-16 bg-gradient-to-br from-sand-beige/40 to-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <FiltroPesquisa valor={pesq} onChange={setPesq} />
           <div className="cartao p-4 sm:p-6 mb-8 grid sm:grid-cols-[1fr_260px] gap-4">
             <div className="relative">
               <i className="fas fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-text-subtle"></i>

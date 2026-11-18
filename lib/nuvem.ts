@@ -30,7 +30,7 @@ import {
 } from "firebase/auth"
 import { FIREBASE_CONFIG } from "./config"
 
-export const COLECOES = ["artigos", "referencias", "imagens", "atualizacoes", "integrantes"] as const
+export const COLECOES = ["pesquisas", "artigos", "referencias", "imagens", "atualizacoes", "integrantes"] as const
 export type Colecao = (typeof COLECOES)[number]
 
 let app: FirebaseApp | null = null

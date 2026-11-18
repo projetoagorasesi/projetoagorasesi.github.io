@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+import FiltroPesquisa from "@/components/FiltroPesquisa"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import PageHero from "@/components/PageHero"
@@ -12,7 +14,9 @@ import { dataBR, TIPOS_ARTIGO } from "@/lib/util"
 import type { Artigo } from "@/lib/tipos"
 
 export default function Artigos() {
-  const { itens, carregando } = useColecao<Artigo>("artigos", ARTIGOS, porDataDesc)
+  const { itens: todos, carregando } = useColecao<Artigo>("artigos", ARTIGOS, porDataDesc)
+  const [pesq, setPesq] = useState("")
+  const itens = todos.filter((a) => !pesq || a.pesquisa === pesq)
 
   return (
     <div className="font-inter text-soil-brown bg-surface">
@@ -25,6 +29,7 @@ export default function Artigos() {
       />
       <section className="py-20 bg-gradient-to-br from-sand-beige/40 to-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <FiltroPesquisa valor={pesq} onChange={setPesq} />
           {carregando && itens.length === 0 ? (
             <p className="text-center text-text-secondary"><i className="fas fa-spinner fa-spin mr-2"></i>Carregando…</p>
           ) : itens.length === 0 ? (

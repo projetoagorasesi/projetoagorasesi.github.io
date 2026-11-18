@@ -19,7 +19,8 @@ import {
   excluirArquivo,
   comprimirImagem,
 } from "@/lib/nuvem"
-import { REFERENCIAS, IMAGENS, INTEGRANTES } from "@/lib/seed"
+import { REFERENCIAS, IMAGENS, INTEGRANTES, PESQUISAS } from "@/lib/seed"
+import { usePesquisas } from "@/components/FiltroPesquisa"
 import { dataBR, TIPOS_ATUALIZACAO, TIPOS_ARTIGO } from "@/lib/util"
 import type { Mensagem } from "@/lib/tipos"
 
@@ -28,7 +29,7 @@ import type { Mensagem } from "@/lib/tipos"
 type Campo = {
   k: string
   rotulo: string
-  tipo: "texto" | "area" | "data" | "numero" | "select" | "arquivo" | "imagem" | "imagens"
+  tipo: "texto" | "area" | "data" | "numero" | "select" | "arquivo" | "imagem" | "imagens" | "pesquisa"
   opcoes?: Record<string, string>
   obrigatorio?: boolean
   dica?: string
@@ -53,6 +54,27 @@ const porData = (k: string) => (a: Registro, b: Registro) => String(b[k] || "").
 
 const SECOES: Secao[] = [
   {
+    id: "pesquisas",
+    colecao: "pesquisas",
+    rotulo: "Pesquisas",
+    icone: "fa-flask",
+    titulo: (x) => x.titulo,
+    subtitulo: (x) => [x.periodo, x.situacao === "concluida" ? "Concluída" : "Em andamento"].filter(Boolean).join(" · "),
+    imagem: (x) => x.capa_url,
+    ordenar: porOrdem,
+    campos: [
+      { k: "id", rotulo: "Código curto (sem espaço nem acento)", tipo: "texto", obrigatorio: true, dica: "Ex.: santo-antonio. Não mude depois de criar." },
+      { k: "titulo", rotulo: "Título", tipo: "texto", obrigatorio: true },
+      { k: "subtitulo", rotulo: "Subtítulo", tipo: "texto" },
+      { k: "pergunta", rotulo: "Pergunta da pesquisa", tipo: "area" },
+      { k: "resumo", rotulo: "Apresentação", tipo: "area" },
+      { k: "periodo", rotulo: "Período estudado", tipo: "texto", dica: "Ex.: 1910–1940" },
+      { k: "situacao", rotulo: "Situação", tipo: "select", opcoes: { "em andamento": "Em andamento", concluida: "Concluída" } },
+      { k: "capa_url", rotulo: "Imagem de capa", tipo: "imagem" },
+      { k: "ordem", rotulo: "Ordem", tipo: "numero" },
+    ],
+  },
+  {
     id: "diario",
     colecao: "atualizacoes",
     rotulo: "Diário de ações",
@@ -62,6 +84,7 @@ const SECOES: Secao[] = [
     imagem: (x) => x.capa_url,
     ordenar: porData("data"),
     campos: [
+      { k: "pesquisa", rotulo: "Pesquisa", tipo: "pesquisa" },
       { k: "titulo", rotulo: "Título", tipo: "texto", obrigatorio: true },
       { k: "tipo", rotulo: "Tipo de ação", tipo: "select", opcoes: Object.fromEntries(Object.entries(TIPOS_ATUALIZACAO).map(([k, v]) => [k, v.rotulo])) },
       { k: "data", rotulo: "Data", tipo: "data", obrigatorio: true },
@@ -82,6 +105,7 @@ const SECOES: Secao[] = [
     imagem: (x) => x.capa_url,
     ordenar: porData("publicado_em"),
     campos: [
+      { k: "pesquisa", rotulo: "Pesquisa", tipo: "pesquisa" },
       { k: "titulo", rotulo: "Título", tipo: "texto", obrigatorio: true },
       { k: "tipo", rotulo: "Tipo", tipo: "select", opcoes: TIPOS_ARTIGO },
       { k: "autores", rotulo: "Autores", tipo: "texto", obrigatorio: true },
@@ -101,6 +125,7 @@ const SECOES: Secao[] = [
     imagem: (x) => x.url,
     ordenar: porOrdem,
     campos: [
+      { k: "pesquisa", rotulo: "Pesquisa", tipo: "pesquisa" },
       { k: "url", rotulo: "Imagem", tipo: "imagem", obrigatorio: true },
       { k: "titulo", rotulo: "Título", tipo: "texto", obrigatorio: true },
       { k: "autor", rotulo: "Autor / fotógrafo", tipo: "texto", dica: "Se não souber, escreva “Autoria a confirmar”." },
@@ -120,6 +145,7 @@ const SECOES: Secao[] = [
     subtitulo: (x) => x.tema || "",
     ordenar: porOrdem,
     campos: [
+      { k: "pesquisa", rotulo: "Pesquisa", tipo: "pesquisa" },
       { k: "abnt", rotulo: "Referência em ABNT", tipo: "area", obrigatorio: true, dica: "SOBRENOME, Nome. Título. Periódico, cidade, v., n., p., ano." },
       { k: "link", rotulo: "Link da fonte original", tipo: "texto", dica: "DOI, página da revista ou repositório." },
       { k: "tema", rotulo: "Tema", tipo: "texto" },
@@ -153,6 +179,7 @@ export default function Painel() {
   const [usuario, setUsuario] = useState<User | null | undefined>(undefined)
   const [editor, setEditor] = useState<boolean | null>(null)
   const [aba, setAba] = useState("diario")
+  const pesquisas = usePesquisas()
   const [erroLogin, setErroLogin] = useState("")
 
   useEffect(
@@ -229,7 +256,7 @@ export default function Painel() {
                 </button>
               ))}
             </div>
-            {SECOES.filter((s) => s.id === aba).map((s) => <Gerenciador key={s.id} secao={s} autor={usuario.displayName || ""} />)}
+            {SECOES.filter((s) => s.id === aba).map((s) => <Gerenciador key={s.id} secao={s} autor={usuario.displayName || ""} pesquisas={pesquisas} />)}
             {aba === "mensagens" && <Mensagens />}
             {aba === "editores" && <Editores />}
             {aba === "importar" && <Importar />}
@@ -252,7 +279,7 @@ function Aviso({ icone, titulo, children }: { icone: string; titulo: string; chi
 
 // ---------- CRUD genérico ----------
 
-function Gerenciador({ secao, autor }: { secao: Secao; autor: string }) {
+function Gerenciador({ secao, autor, pesquisas }: { secao: Secao; autor: string; pesquisas: { id: string; titulo: string }[] }) {
   const [itens, setItens] = useState<Registro[]>([])
   const [carregando, setCarregando] = useState(true)
   const [editando, setEditando] = useState<Registro | null>(null)
@@ -292,6 +319,7 @@ function Gerenciador({ secao, autor }: { secao: Secao; autor: string }) {
     return (
       <Formulario
         secao={secao}
+        pesquisas={pesquisas}
         inicial={editando}
         onCancelar={() => setEditando(null)}
         onSalvo={() => {
@@ -301,7 +329,8 @@ function Gerenciador({ secao, autor }: { secao: Secao; autor: string }) {
       />
     )
 
-  const novo: Registro = secao.id === "diario" ? { tipo: "visita", data: new Date().toISOString().slice(0, 10), autor } : secao.id === "artigos" ? { tipo: "artigo" } : secao.id === "integrantes" ? { grupo: "estudante" } : {}
+  const base: Registro = secao.campos.some((c) => c.k === "pesquisa") ? { pesquisa: "santo-antonio" } : {}
+  const novo: Registro = { ...base, ...(secao.id === "diario" ? { tipo: "visita", data: new Date().toISOString().slice(0, 10), autor } : secao.id === "artigos" ? { tipo: "artigo" } : secao.id === "integrantes" ? { grupo: "estudante" } : secao.id === "pesquisas" ? { situacao: "em andamento" } : {}) }
 
   return (
     <div>
@@ -317,7 +346,7 @@ function Gerenciador({ secao, autor }: { secao: Secao; autor: string }) {
       ) : itens.length === 0 ? (
         <div className="cartao p-10 text-center text-text-secondary">
           Nada publicado aqui ainda.
-          {["galeria", "referencias", "integrantes"].includes(secao.id) && (
+          {["galeria", "referencias", "integrantes", "pesquisas"].includes(secao.id) && (
             <> Enquanto estiver vazio, o site mostra os dados iniciais. Use a aba “Dados iniciais” para trazê-los para cá e poder editar.</>
           )}
         </div>
@@ -350,12 +379,14 @@ function Gerenciador({ secao, autor }: { secao: Secao; autor: string }) {
 
 function Formulario({
   secao,
+  pesquisas = [],
   inicial,
   onCancelar,
   onSalvo,
 }: {
   secao: Secao
   inicial: Registro
+  pesquisas?: { id: string; titulo: string }[]
   onCancelar: () => void
   onSalvo: () => void
 }) {
@@ -413,7 +444,22 @@ function Formulario({
               {c.rotulo}
               {c.obrigatorio && <span className="text-danger"> *</span>}
             </label>
-            {c.tipo === "texto" && <input className="campo" value={dados[c.k] || ""} onChange={(e) => mudar(c.k, e.target.value)} />}
+            {c.tipo === "texto" && (
+              <input
+                className="campo"
+                value={dados[c.k] || ""}
+                disabled={c.k === "id" && !!inicial.id}
+                onChange={(e) => mudar(c.k, c.k === "id" ? e.target.value.toLowerCase().normalize("NFD").replace(/[^a-z0-9-]/g, "-") : e.target.value)}
+              />
+            )}
+            {c.tipo === "pesquisa" && (
+              <select className="campo" value={dados[c.k] || ""} onChange={(e) => mudar(c.k, e.target.value)}>
+                <option value="">Geral (todas)</option>
+                {pesquisas.map((p) => (
+                  <option key={p.id} value={p.id}>{p.titulo}</option>
+                ))}
+              </select>
+            )}
             {c.tipo === "numero" && <input type="number" className="campo" value={dados[c.k] ?? ""} onChange={(e) => mudar(c.k, e.target.value)} />}
             {c.tipo === "data" && <input type="date" className="campo" value={dados[c.k] || ""} onChange={(e) => mudar(c.k, e.target.value)} />}
             {c.tipo === "area" && <textarea rows={c.k === "texto" ? 10 : 4} className="campo resize-y" value={dados[c.k] || ""} onChange={(e) => mudar(c.k, e.target.value)} />}
@@ -623,10 +669,11 @@ function Importar() {
     <div className="max-w-2xl cartao p-8">
       <h2 className="font-poppins font-bold text-2xl mb-2">Dados iniciais</h2>
       <p className="text-text-secondary mb-6">
-        O site já vem com as referências, as 16 imagens da galeria e os nomes da equipe. Importe para a nuvem quando
+        O site já vem com a pesquisa de Santo Antônio, as referências, as 16 imagens da galeria e os nomes da equipe. Importe para a nuvem quando
         quiser editar ou acrescentar itens. Itens já importados não são duplicados.
       </p>
       <div className="flex flex-wrap gap-3">
+        <button className="btn-dark" onClick={() => importar("pesquisas", PESQUISAS)}>Pesquisas ({PESQUISAS.length})</button>
         <button className="btn-teal" onClick={() => importar("referencias", REFERENCIAS)}>Referências ({REFERENCIAS.length})</button>
         <button className="btn-copper" onClick={() => importar("imagens", IMAGENS)}>Galeria ({IMAGENS.length})</button>
         <button className="btn-dark" onClick={() => importar("integrantes", INTEGRANTES)}>Integrantes ({INTEGRANTES.length})</button>

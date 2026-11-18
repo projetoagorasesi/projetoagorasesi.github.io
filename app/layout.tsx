@@ -10,9 +10,9 @@ import "@fontsource/poppins/700.css"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "ÁGORA · Santo Antônio em transformação (1910–1940)",
+  title: "Projeto Ágora · Escola SESI Ibura",
   description:
-    "Projeto de pesquisa da Escola SESI Ibura sobre as mudanças do bairro de Santo Antônio, no Recife, entre 1910 e 1940. Artigos, referências, imagens e diário de ações.",
+    "Projeto de iniciação científica da Escola SESI Ibura: pesquisas sobre a história e o patrimônio do Recife, com artigos, referências, imagens e diário de ações.",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

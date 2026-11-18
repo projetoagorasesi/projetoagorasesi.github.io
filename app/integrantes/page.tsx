@@ -40,7 +40,7 @@ export default function Integrantes() {
       <PageHero
         selo="CONHEÇA A EQUIPE"
         titulo="Integrantes"
-        texto="Estudantes da Escola SESI Ibura que decidiram investigar a história do centro do Recife, com a orientação do professor de História."
+        texto="Estudantes da Escola SESI Ibura que decidiram investigar a história do Recife, com a orientação do professor de História."
         imagem="/galeria/03_Ponte_da_Boa_Vista_1900_Benicio_Dias.jpg"
       />
 
@@ -48,15 +48,15 @@ export default function Integrantes() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="selo bg-tech-teal/10 text-tech-teal mb-6">SOBRE O PROJETO</div>
-            <h2 className="font-poppins font-bold text-4xl text-soil-brown mb-6">Por que Santo Antônio?</h2>
+            <h2 className="font-poppins font-bold text-4xl text-soil-brown mb-6">O que é o Projeto Ágora</h2>
             <div className="space-y-4 text-lg text-text-secondary leading-relaxed">
               <p>
-                Santo Antônio é um dos bairros mais antigos do Recife e passou por grandes mudanças na primeira metade do
-                século XX. Ruas inteiras foram alargadas, igrejas e sobrados vieram abaixo e novas avenidas surgiram.
+                O Projeto Ágora reúne estudantes da Escola SESI Ibura, da Rede SESI Pernambuco, em pesquisas de iniciação
+                científica sobre a história, a memória e o patrimônio do Recife.
               </p>
               <p>
-                O projeto nasceu no Programa ÁGORA, da Rede SESI Pernambuco, e foi inscrito no SESI Ciência na Rua 2026.
-                Nossa pergunta é como o bairro mudou entre 1910 e 1940, e o que essas mudanças significaram para quem vivia nele.
+                A primeira pesquisa investiga como o bairro de Santo Antônio mudou entre 1910 e 1940 e foi inscrita no
+                SESI Ciência na Rua 2026.
               </p>
             </div>
           </div>

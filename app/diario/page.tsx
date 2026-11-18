@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import FiltroPesquisa from "@/components/FiltroPesquisa"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import PageHero from "@/components/PageHero"
@@ -15,7 +16,8 @@ import type { Atualizacao } from "@/lib/tipos"
 export default function Diario() {
   const { itens, carregando } = useColecao<Atualizacao>("atualizacoes", ATUALIZACOES, porDataDesc)
   const [tipo, setTipo] = useState("")
-  const lista = itens.filter((a) => !tipo || a.tipo === tipo)
+  const [pesq, setPesq] = useState("")
+  const lista = itens.filter((a) => !pesq || !a.pesquisa || a.pesquisa === pesq).filter((a) => !tipo || a.tipo === tipo)
 
   return (
     <div className="font-inter text-soil-brown bg-surface">
@@ -28,6 +30,7 @@ export default function Diario() {
       />
       <section className="py-16 bg-gradient-to-br from-sand-beige/40 to-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <FiltroPesquisa valor={pesq} onChange={setPesq} />
           <div className="flex flex-wrap gap-3 justify-center mb-12">
             {[["", "Todas"], ...Object.entries(TIPOS_ATUALIZACAO).map(([k, v]) => [k, v.rotulo])].map(([k, r]) => (
               <button
