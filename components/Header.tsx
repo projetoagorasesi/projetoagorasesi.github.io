@@ -61,13 +61,6 @@ export default function Header({ pagina, transparente = false }: { pagina?: stri
             >
               Fale conosco
             </Link>
-            <Link
-              href="/painel/"
-              title="Área da equipe"
-              className="hidden sm:inline-flex px-5 py-2 border-2 border-white text-white rounded-full hover:bg-white hover:text-soil-brown transition font-medium"
-            >
-              Equipe
-            </Link>
             <button
               onClick={() => setAberto(!aberto)}
               className="xl:hidden w-11 h-11 rounded-full border border-white/30 text-white flex items-center justify-center"
@@ -79,7 +72,7 @@ export default function Header({ pagina, transparente = false }: { pagina?: stri
         </div>
         {aberto && (
           <div className="xl:hidden mt-4 pb-2 grid gap-1">
-            {[...LINKS, { href: "/contato/", rotulo: "Fale conosco", id: "contato" }, { href: "/painel/", rotulo: "Área da equipe", id: "painel" }].map((l) => (
+            {[...LINKS, { href: "/contato/", rotulo: "Fale conosco", id: "contato" }].map((l) => (
               <Link
                 key={l.id}
                 href={l.href}

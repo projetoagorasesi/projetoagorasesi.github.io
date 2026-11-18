@@ -42,6 +42,7 @@ export default function Footer() {
         </div>
         <div className="pt-8 border-t border-white/10 text-center text-sand-beige text-sm space-y-2">
           <p>© 2026 Projeto Ágora · Escola SESI Ibura. Textos da equipe; imagens com créditos aos autores e acervos.</p>
+          <p><Link href="/painel/" className="text-sand-beige/60 hover:text-aged-copper text-xs"><i className="fas fa-lock mr-1"></i>Área da equipe</Link></p>
         </div>
       </div>
     </footer>
