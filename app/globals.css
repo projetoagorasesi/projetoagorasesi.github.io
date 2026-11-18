@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --soil-brown: #2e2a24;
+  --aged-copper: #a67c52;
+  --sand-beige: #e0dccf;
+  --tech-teal: #00897b;
+  --surface: #ffffff;
+  --surface-muted: #f9fafb;
+  --text-primary: #2e2a24;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --text-subtle: #9ca3af;
+  --text-on-dark: #ffffff;
+  --text-on-brand: #ffffff;
+  --border-default: #e5e7eb;
+  --border-muted: #f3f4f6;
+  --danger: #dc2626;
+  --success: #16a34a;
+}
+
+@theme inline {
+  --font-poppins: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-inter: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter);
+  --color-soil-brown: var(--soil-brown);
+  --color-aged-copper: var(--aged-copper);
+  --color-sand-beige: var(--sand-beige);
+  --color-tech-teal: var(--tech-teal);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-subtle: var(--text-subtle);
+  --color-text-on-dark: var(--text-on-dark);
+  --color-text-on-brand: var(--text-on-brand);
+  --color-border-default: var(--border-default);
+  --color-border-muted: var(--border-muted);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+}
+
+@layer base {
+  body { @apply bg-surface text-soil-brown; overflow-x: clip; }
+  * { border-color: var(--border-default); }
+}
+
+.campo {
+  @apply w-full px-4 py-3 rounded-xl border border-border-default bg-white text-soil-brown focus:outline-none focus:ring-2 focus:ring-tech-teal/40 focus:border-tech-teal transition;
+}
+.rotulo { @apply block text-sm font-semibold text-soil-brown mb-2; }
+.btn-teal { @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-tech-teal text-white rounded-full font-semibold hover:opacity-90 transition disabled:opacity-50; }
+.btn-copper { @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-aged-copper text-white rounded-full font-semibold hover:opacity-90 transition disabled:opacity-50; }
+.btn-dark { @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-soil-brown text-white rounded-full font-semibold hover:opacity-90 transition; }
+.selo { @apply inline-block px-4 py-2 rounded-full font-semibold text-sm tracking-wide; }
+.cartao { @apply bg-surface rounded-2xl shadow-lg border border-border-muted; }
