@@ -13,6 +13,22 @@ export const metadata: Metadata = {
   title: "Projeto Ágora · Escola SESI Ibura",
   description:
     "Projeto de iniciação científica da Escola SESI Ibura: pesquisas sobre a história e o patrimônio do Recife, com artigos, referências, imagens e diário de ações.",
+  metadataBase: new URL("https://projetoagorasesi.github.io"),
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "https://projetoagorasesi.github.io/",
+    siteName: "Projeto Ágora",
+    title: "Projeto Ágora · Escola SESI Ibura",
+    description: "Pesquisas sobre a história e o patrimônio do Recife: artigos, imagens, referências e diário de bordo.",
+    images: [{ url: "/og-agora-v1.jpg", width: 1200, height: 630, alt: "Projeto Ágora, Escola SESI Ibura" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Projeto Ágora · Escola SESI Ibura",
+    description: "Pesquisas sobre a história e o patrimônio do Recife.",
+    images: ["/og-agora-v1.jpg"],
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
