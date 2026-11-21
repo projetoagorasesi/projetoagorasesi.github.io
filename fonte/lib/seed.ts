@@ -590,8 +590,8 @@ export const INTEGRANTES: Integrante[] = [
  {
   "id": "int-orientador",
   "nome": "Prof. Matheus Ernandes Souza de Moura Coutinho",
-  "funcao": "Orientador · História",
-  "descricao": "Professor de História da Escola SESI Ibura.",
+  "funcao": "Orientador · Ciências Humanas",
+  "descricao": "Professor de Ciências Humanas da Escola SESI Ibura.",
   "foto_url": null,
   "grupo": "orientador",
   "ordem": 1
@@ -599,8 +599,8 @@ export const INTEGRANTES: Integrante[] = [
  {
   "id": "int-orientador-2",
   "nome": "Prof. Me. Anderson Leonardo de Almeida Serafim",
-  "funcao": "Coorientador",
-  "descricao": "",
+  "funcao": "Coorientador · Ciências Humanas",
+  "descricao": "Professor de Ciências Humanas.",
   "foto_url": null,
   "grupo": "orientador",
   "ordem": 2

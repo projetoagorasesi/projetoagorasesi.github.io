@@ -40,7 +40,7 @@ export default function Integrantes() {
       <PageHero
         selo="CONHEÇA A EQUIPE"
         titulo="Integrantes"
-        texto="Estudantes da Escola SESI Ibura que decidiram investigar a história do Recife, com a orientação do professor de História."
+        texto="Estudantes da Escola SESI Ibura que decidiram investigar a história do Recife, com a orientação dos professores de Ciências Humanas."
         imagem="/diario/grupo_01.jpg"
       />
 
