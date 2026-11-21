@@ -26,7 +26,7 @@ export default function Diario() {
         selo="ATUALIZAÇÕES DO GRUPO"
         titulo="Diário de ações"
         texto="Visitas a arquivos e museus, pesquisas, debates, entrevistas e eventos. Cada passo da equipe, registrado aqui."
-        imagem="/galeria/07_Aterro_e_expansao_do_cais_1911.jpg"
+        imagem="/diario/e5_01.jpg"
       />
       <section className="py-16 bg-gradient-to-br from-sand-beige/40 to-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">

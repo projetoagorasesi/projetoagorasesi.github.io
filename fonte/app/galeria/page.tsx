@@ -37,11 +37,23 @@ export default function Galeria() {
       <PageHero
         selo="ACERVO DE IMAGENS"
         titulo="Galeria"
-        texto="Fotografias, gravuras, pinturas e cartões-postais que usamos na pesquisa. Cada imagem traz autor, data e acervo."
+        texto="Fotografias, gravuras, pinturas e cartões-postais selecionados para a exposição do Projeto Ágora no SESI Ibura. Cada imagem traz autor, data e acervo."
         imagem="/galeria/01_Santo_Antonio_1880_Benicio_Dias.jpg"
       />
       <section className="py-16 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="mb-10 rounded-2xl bg-gradient-to-r from-soil-brown to-soil-brown/90 text-white p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 shadow-lg">
+            <div className="w-14 h-14 shrink-0 rounded-2xl bg-aged-copper/20 flex items-center justify-center">
+              <i className="fas fa-building-columns text-aged-copper text-2xl"></i>
+            </div>
+            <div>
+              <h2 className="font-poppins font-bold text-xl sm:text-2xl mb-1">Imagens da nossa exposição</h2>
+              <p className="text-sand-beige leading-relaxed">
+                Estas imagens foram selecionadas pela equipe para a exposição museológica do Projeto Ágora, montada na unidade
+                do SESI Ibura. A escolha final partiu da catalogação feita no acervo da Fundação Joaquim Nabuco.
+              </p>
+            </div>
+          </div>
           <FiltroPesquisa valor={pesq} onChange={setPesq} />
           <div className="flex flex-wrap gap-3 justify-center mb-12">
             {["", ...categorias].map((c) => (

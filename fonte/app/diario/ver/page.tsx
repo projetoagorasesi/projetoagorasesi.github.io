@@ -57,9 +57,9 @@ export default function VerAtualizacao() {
                 {item.resumo && <p className="text-lg text-text-secondary mb-6 font-medium">{item.resumo}</p>}
                 <div className="text-text-primary leading-relaxed whitespace-pre-line">{item.texto}</div>
                 {item.fotos && item.fotos.length > 0 && (
-                  <div className="grid grid-cols-2 gap-4 mt-8">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-8">
                     {item.fotos.map((f) => (
-                      <ArquivoImg key={f} src={f} alt="" className="w-full h-48 object-cover rounded-xl" />
+                      <ArquivoImg key={f} src={f} alt={`Registro: ${item.titulo}`} className="w-full h-40 sm:h-48 object-cover rounded-xl" />
                     ))}
                   </div>
                 )}

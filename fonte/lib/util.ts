@@ -22,6 +22,7 @@ export const TIPOS_ATUALIZACAO: Record<string, { rotulo: string; icone: string; 
   entrevista: { rotulo: "Entrevista", icone: "fa-microphone", cor: "bg-tech-teal" },
   evento: { rotulo: "Evento", icone: "fa-calendar-check", cor: "bg-aged-copper" },
   oficina: { rotulo: "Oficina", icone: "fa-pen-ruler", cor: "bg-soil-brown" },
+  reuniao: { rotulo: "Reunião", icone: "fa-users", cor: "bg-tech-teal" },
 }
 
 export const TIPOS_ARTIGO: Record<string, string> = {

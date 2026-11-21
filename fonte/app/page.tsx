@@ -5,6 +5,9 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import ArquivoImg from "@/components/ArquivoImg"
 import AntesDepois from "@/components/AntesDepois"
+import MapaAgora from "@/components/MapaAgora"
+import Parcerias from "@/components/Parcerias"
+import { MATERIA_G1 } from "@/lib/config"
 import CartaoPesquisa from "@/components/CartaoPesquisa"
 import { usePesquisas } from "@/components/FiltroPesquisa"
 import { Selo, Vazio } from "@/components/Secao"
@@ -12,6 +15,9 @@ import { asset, dataBR, TIPOS_ATUALIZACAO } from "@/lib/util"
 import { useColecao, porOrdem, porDataDesc } from "@/lib/useColecao"
 import { REFERENCIAS, IMAGENS, ATUALIZACOES, INTEGRANTES, ARTIGOS } from "@/lib/seed"
 import type { Referencia, Imagem, Atualizacao, Integrante, Artigo } from "@/lib/tipos"
+
+/** Pares de imagens "antes e depois" (ver a matéria do G1). Cada item: lugar, antes, depois, rótulos e crédito. */
+const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes: string; rotuloDepois: string; credito: string }[] = []
 
 const EIXOS = [
   {
@@ -36,7 +42,7 @@ const EIXOS = [
 
 const RECURSOS = [
   {
-    href: "/artigos/",
+    href: "/pesquisas/#artigos",
     icone: "fa-file-lines",
     cor: "from-tech-teal to-tech-teal/70",
     link: "text-tech-teal",
@@ -114,7 +120,7 @@ export default function Inicio() {
             <Link href="/pesquisas/" className="btn-teal text-lg px-8 py-4 shadow-lg hover:scale-105">
               <i className="fas fa-flask"></i>Conhecer as pesquisas
             </Link>
-            <Link href="/artigos/" className="btn-copper text-lg px-8 py-4 shadow-lg hover:scale-105">
+            <Link href="/pesquisas/#artigos" className="btn-copper text-lg px-8 py-4 shadow-lg hover:scale-105">
               <i className="fas fa-file-lines"></i>Ler nossos artigos
             </Link>
           </div>
@@ -136,6 +142,8 @@ export default function Inicio() {
           </div>
         </div>
       </section>
+
+      <MapaAgora />
 
       {/* O projeto */}
       <section className="py-24 bg-surface">
@@ -174,12 +182,12 @@ export default function Inicio() {
               <div className="hidden sm:block absolute -bottom-6 -right-6 w-72 h-72 bg-aged-copper/10 rounded-3xl"></div>
               <figure className="relative h-[460px] md:h-[560px] overflow-hidden rounded-2xl shadow-2xl">
                 <img
-                  src={asset("/galeria/08_Demolicao_e_construcao_Marco_Zero_1912_Benicio_Dias.jpg")}
-                  alt="Demolição e construção na área do Marco Zero, 1912"
+                  src={asset("/diario/grupo_01.jpg")}
+                  alt="Integrantes do Projeto Ágora com o professor orientador, no SESI Ibura"
                   className="w-full h-full object-cover"
                 />
                 <figcaption className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/80 to-transparent text-white text-sm">
-                  Demolição e construção na área do Marco Zero, 1912. Reprodução de Benício Dias.
+                  Integrantes do Projeto Ágora no SESI Ibura, 05/11/2026.
                 </figcaption>
               </figure>
             </div>
@@ -212,20 +220,41 @@ export default function Inicio() {
       <section className="py-24 bg-soil-brown">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <span className="selo bg-aged-copper/20 text-aged-copper mb-6">PESQUISA EM DESTAQUE · SANTO ANTÔNIO</span>
+            <span className="selo bg-aged-copper/20 text-aged-copper mb-6">ONTEM E HOJE</span>
             <h2 className="font-poppins font-bold text-4xl md:text-5xl text-white mt-6 mb-4 text-balance">
-              A Avenida Guararapes, 1940 e 2015
+              O Recife do século XX e o de agora
             </h2>
             <p className="text-lg text-sand-beige max-w-2xl mx-auto">
-              Arraste a barra para comparar a avenida recém-aberta com a mesma paisagem 75 anos depois.
+              Arraste a barra para comparar a mesma paisagem em dois tempos.
             </p>
           </div>
-          <AntesDepois
-            antes={asset("/galeria/09_Vista_Av_Guararapes_1940_Sergio_Benicio_Dias.jpg")}
-            depois={asset("/galeria/14_Av_Guararapes_2015_Carlos_Ezequiel.jpg")}
-            rotuloAntes="1940 · Sérgio Benício Dias"
-            rotuloDepois="2015 · Carlos Ezequiel"
-          />
+          {ANTES_DEPOIS.length > 0 && (
+            <div className="grid gap-12 mb-14">
+              {ANTES_DEPOIS.map((p) => (
+                <figure key={p.lugar}>
+                  <AntesDepois antes={asset(p.antes)} depois={asset(p.depois)} rotuloAntes={p.rotuloAntes} rotuloDepois={p.rotuloDepois} />
+                  <figcaption className="mt-4 text-center text-sand-beige text-sm">
+                    <strong className="text-white">{p.lugar}</strong> · {p.credito}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
+          <div className="rounded-3xl bg-white/5 border border-white/10 p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-8">
+            <div className="w-16 h-16 shrink-0 rounded-2xl bg-aged-copper/20 flex items-center justify-center">
+              <i className="fas fa-newspaper text-aged-copper text-2xl"></i>
+            </div>
+            <div className="flex-1">
+              <h3 className="font-poppins font-bold text-2xl md:text-3xl text-white mb-2">Quer saber mais? Leia a matéria completa do G1</h3>
+              <p className="text-sand-beige leading-relaxed">
+                &ldquo;{MATERIA_G1.titulo}&rdquo;. {MATERIA_G1.veiculo}, {MATERIA_G1.data}. As comparações de imagens desta
+                seção têm como referência essa reportagem; os créditos das fotografias pertencem ao g1 e aos seus autores.
+              </p>
+            </div>
+            <a href={MATERIA_G1.url} target="_blank" rel="noopener noreferrer" className="btn-copper shrink-0">
+              Ler no G1 <i className="fas fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -357,6 +386,8 @@ export default function Inicio() {
         </div>
       </section>
 
+      <Parcerias />
+
       {/* Equipe + contato */}
       <section className="py-24 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -375,7 +406,7 @@ export default function Inicio() {
                       <ArquivoImg src={p.foto_url} alt={p.nome} className="w-full h-full object-cover" />
                     ) : (
                       <span className="font-poppins font-bold text-3xl text-soil-brown">
-                        {p.nome.replace(/^Prof(a)?\.\s*/, "").split(" ").map((x) => x[0]).slice(0, 2).join("")}
+                        {p.nome.replace(/^Prof(a)?\.\s*((M[ea]|Dr(a)?)\.\s*)?/, "").split(" ").filter((x) => /^[A-ZÀ-Ý]/.test(x)).map((x) => x[0]).slice(0, 2).join("")}
                       </span>
                     )}
                   </div>

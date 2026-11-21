@@ -17,8 +17,7 @@ export default function Footer() {
           <div>
             <h4 className="font-poppins font-semibold text-lg mb-4">Pesquisa</h4>
             <ul className="space-y-2 text-sand-beige text-sm">
-              <li><Link href="/pesquisas/" className="hover:text-aged-copper transition-colors">Nossas pesquisas</Link></li>
-              <li><Link href="/artigos/" className="hover:text-aged-copper transition-colors">Nossos artigos</Link></li>
+              <li><Link href="/pesquisas/" className="hover:text-aged-copper transition-colors">Pesquisas e artigos</Link></li>
               <li><Link href="/referencias/" className="hover:text-aged-copper transition-colors">Referências</Link></li>
               <li><Link href="/galeria/" className="hover:text-aged-copper transition-colors">Galeria de imagens</Link></li>
             </ul>
@@ -40,9 +39,9 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="pt-8 border-t border-white/10 text-center text-sand-beige text-sm space-y-2">
-          <p>© 2026 Projeto Ágora · Escola SESI Ibura. Textos da equipe; imagens com créditos aos autores e acervos.</p>
-          <p><Link href="/painel/" className="text-sand-beige/60 hover:text-aged-copper text-xs"><i className="fas fa-lock mr-1"></i>Área da equipe</Link></p>
+        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-sand-beige text-sm">
+          <p className="text-center sm:text-left">© 2026 Projeto Ágora · Escola SESI Ibura. Textos da equipe; imagens com créditos aos autores e acervos.</p>
+          <Link href="/painel/" className="shrink-0 text-sand-beige/60 hover:text-aged-copper text-xs"><i className="fas fa-lock mr-1"></i>Área da equipe</Link>
         </div>
       </div>
     </footer>

@@ -5,8 +5,7 @@ import { useEffect, useState } from "react"
 
 const LINKS = [
   { href: "/", rotulo: "Início", id: "inicio" },
-  { href: "/pesquisas/", rotulo: "Pesquisas", id: "pesquisas" },
-  { href: "/artigos/", rotulo: "Artigos", id: "artigos" },
+  { href: "/pesquisas/", rotulo: "Pesquisas e artigos", id: "pesquisas" },
   { href: "/referencias/", rotulo: "Referências", id: "referencias" },
   { href: "/galeria/", rotulo: "Galeria", id: "galeria" },
   { href: "/diario/", rotulo: "Diário", id: "diario" },

@@ -9,7 +9,7 @@ import { INTEGRANTES } from "@/lib/seed"
 import type { Integrante } from "@/lib/tipos"
 
 function Cartao({ p }: { p: Integrante }) {
-  const iniciais = p.nome.replace(/^Prof(a)?\.\s*/, "").split(" ").map((x) => x[0]).slice(0, 2).join("")
+  const iniciais = p.nome.replace(/^Prof(a)?\.\s*((M[ea]|Dr(a)?)\.\s*)?/, "").split(" ").filter((x) => /^[A-ZÀ-Ý]/.test(x)).map((x) => x[0]).slice(0, 2).join("")
   return (
     <div className="cartao p-8 text-center hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
       <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-aged-copper/30 to-tech-teal/30 flex items-center justify-center ring-4 ring-sand-beige">
@@ -41,7 +41,7 @@ export default function Integrantes() {
         selo="CONHEÇA A EQUIPE"
         titulo="Integrantes"
         texto="Estudantes da Escola SESI Ibura que decidiram investigar a história do Recife, com a orientação do professor de História."
-        imagem="/galeria/03_Ponte_da_Boa_Vista_1900_Benicio_Dias.jpg"
+        imagem="/diario/grupo_01.jpg"
       />
 
       <section className="py-24 bg-surface">

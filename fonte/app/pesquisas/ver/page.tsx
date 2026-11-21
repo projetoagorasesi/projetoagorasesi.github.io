@@ -32,7 +32,7 @@ export default function VerPesquisa() {
     )
 
   const blocos = [
-    { href: "/artigos/", icone: "fa-file-lines", n: artigos.length, r: "Artigos" },
+    { href: "/pesquisas/#artigos", icone: "fa-file-lines", n: artigos.length, r: "Artigos" },
     { href: "/galeria/", icone: "fa-images", n: imagens.length, r: "Imagens" },
     { href: "/referencias/", icone: "fa-book-open", n: refs.length, r: "Referências" },
     { href: "/diario/", icone: "fa-route", n: acoes.length, r: "Ações" },

@@ -3,6 +3,7 @@
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import PageHero from "@/components/PageHero"
+import ListaArtigos from "@/components/ListaArtigos"
 import CartaoPesquisa from "@/components/CartaoPesquisa"
 import { usePesquisas } from "@/components/FiltroPesquisa"
 
@@ -13,8 +14,8 @@ export default function Pesquisas() {
       <Header pagina="pesquisas" />
       <PageHero
         selo="INICIAÇÃO CIENTÍFICA"
-        titulo="Nossas pesquisas"
-        texto="Cada pesquisa do Projeto Ágora parte de uma pergunta sobre a nossa cidade e a nossa história. Escolha uma para conhecer."
+        titulo="Pesquisas e artigos"
+        texto="Cada pesquisa do Projeto Ágora parte de uma pergunta sobre a nossa cidade e a nossa história. Conheça as pesquisas e, logo abaixo, os textos que a equipe produziu."
         imagem="/galeria/16_Frans_Post_Forte_Frederik_Hendrik_1640.jpg"
       />
       <section className="py-20 bg-gradient-to-br from-sand-beige/40 to-white">
@@ -24,6 +25,7 @@ export default function Pesquisas() {
           ))}
         </div>
       </section>
+      <ListaArtigos />
       <Footer />
     </div>
   )
