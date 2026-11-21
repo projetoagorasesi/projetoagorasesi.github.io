@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --soil-brown: #520e1f;
-  --aged-copper: #84694e;
-  --sand-beige: #ddd9d0;
-  --tech-teal: #587593;
-  --sky: #99aec3;
+  --soil-brown: #2e2a24;
+  --aged-copper: #a67c52;
+  --sand-beige: #e0dccf;
+  --tech-teal: #520e1f;
+  --sky: #a67c52;
   --surface: #ffffff;
   --surface-muted: #f9fafb;
-  --text-primary: #2b1a1d;
+  --text-primary: #2e2a24;
   --text-secondary: #4b5563;
   --text-muted: #6b7280;
   --text-subtle: #9ca3af;
@@ -58,11 +58,9 @@
 .selo { @apply inline-block px-4 py-2 rounded-full font-semibold text-sm tracking-wide; }
 .cartao { @apply bg-surface rounded-2xl shadow-lg border border-border-muted; }
 
-/* Identidade visual: em fundos vinho, os destaques usam o azul-claro da paleta para manter a leitura. */
-[class*="bg-soil-brown"] .text-aged-copper, [class*="from-soil-brown"] .text-aged-copper,
-[class*="bg-soil-brown"] .text-tech-teal, [class*="from-soil-brown"] .text-tech-teal { color: var(--sky); }
-[class*="bg-soil-brown"] .border-aged-copper\/40, [class*="from-soil-brown"] .border-aged-copper\/40 { border-color: rgb(153 174 195 / 0.5); }
-[class*="bg-soil-brown"] .bg-aged-copper\/20, [class*="from-soil-brown"] .bg-aged-copper\/20 { background-color: rgb(153 174 195 / 0.18); }
-.btn-sky { @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-sky text-soil-brown rounded-full font-semibold hover:opacity-90 transition; }
+/* Em fundos escuros, textos no roxo da identidade perdem leitura: usam o cobre. */
+[class*="bg-soil-brown"] .text-tech-teal, [class*="from-soil-brown"] .text-tech-teal { color: var(--aged-copper); }
+
+.btn-sky { @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-aged-copper text-white rounded-full font-semibold hover:opacity-90 transition; }
 .rotulo-mapa { background: #520e1f; color: #fff; border: none; border-radius: 999px; padding: 4px 10px; font-weight: 600; font-family: Inter, sans-serif; box-shadow: 0 2px 6px rgb(0 0 0 / 0.3); }
 .rotulo-mapa::before { display: none; }
