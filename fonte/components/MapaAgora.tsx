@@ -25,10 +25,9 @@ function MapaReal() {
         scrollWheelZoom: false,
         attributionControl: true,
       })
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
-        subdomains: "abcd",
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">colaboradores do OpenStreetMap</a>',
       }).addTo(mapa)
       L.circleMarker([-8.0631, -34.8711], { radius: 9, color: "#ffffff", weight: 3, fillColor: "#520e1f", fillOpacity: 1 })
         .addTo(mapa)
