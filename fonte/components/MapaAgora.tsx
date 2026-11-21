@@ -11,34 +11,58 @@ const PASSOS = [
   { icone: "fa-landmark", titulo: "Descubra cada lugar", texto: "Imagens de época e a história do que mudou na cidade." },
 ]
 
-/** Mapa real e atual do centro do Recife (OpenStreetMap), como prévia do site Mapa Ágora. */
+type Ponto = { n: number; nome: string; ano: string; texto: string; lat: number; lng: number; aprox?: boolean }
+
+/** Lugares históricos da pesquisa, no percurso do Marco Zero a São José. */
+const PONTOS: Ponto[] = [
+  { n: 1, nome: "Marco Zero", ano: "1912", lat: -8.0631, lng: -34.8711, texto: "Praça Rio Branco, de frente para o porto. Em 1912 a área passava por demolições e obras da reforma do Bairro do Recife." },
+  { n: 2, nome: "Igreja do Corpo Santo", ano: "1911", lat: -8.06374, lng: -34.87229, aprox: true, texto: "A antiga matriz do Bairro do Recife começou a ser demolida em 1911, na reforma urbana do porto." },
+  { n: 3, nome: "Ponte Maurício de Nassau", ano: "séc. XVII", lat: -8.06377, lng: -34.87542, texto: "No lugar da primeira ponte do Recife, do tempo de Maurício de Nassau, ligando o Bairro do Recife a Santo Antônio." },
+  { n: 4, nome: "Ponte Buarque de Macedo", ano: "1902", lat: -8.06198, lng: -34.87542, texto: "Outra ligação entre o porto e Santo Antônio, fotografada em 1902 por Ramiro M. Costa e Filhos." },
+  { n: 5, nome: "Praça da República", ano: "séc. XIX", lat: -8.06039, lng: -34.87757, texto: "Centro do poder e da cultura em Santo Antônio, com o Palácio do Campo das Princesas e o Teatro de Santa Isabel." },
+  { n: 6, nome: "Avenida Guararapes", ano: "1940", lat: -8.06422, lng: -34.87965, texto: "Aberta nas reformas das décadas de 1930 e 1940. Em 1940 já exibia os novos edifícios (foto de Sérgio Benício Dias)." },
+  { n: 7, nome: "Avenida Dantas Barreto", ano: "séc. XX", lat: -8.06741, lng: -34.87933, texto: "Sua abertura demoliu casarios e a Igreja dos Martírios, mudando o traçado de Santo Antônio e São José." },
+]
+
+/** Arte do Mapa Ágora sobre o mapa real e atual do centro do Recife (OpenStreetMap). */
 function MapaReal() {
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     let mapa: import("leaflet").Map | null = null
+    let obs: ResizeObserver | null = null
     let cancelado = false
     import("leaflet").then((L) => {
       if (cancelado || !ref.current) return
-      mapa = L.map(ref.current, {
-        center: [-8.0665, -34.8755],
-        zoom: 15,
-        scrollWheelZoom: false,
-        attributionControl: true,
-      })
+      mapa = L.map(ref.current, { scrollWheelZoom: false, zoomControl: true })
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
+        className: "mapa-antigo",
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">colaboradores do OpenStreetMap</a>',
       }).addTo(mapa)
-      L.circleMarker([-8.0631, -34.8711], { radius: 9, color: "#ffffff", weight: 3, fillColor: "#520e1f", fillOpacity: 1 })
-        .addTo(mapa)
-        .bindTooltip("Marco Zero", { permanent: true, direction: "right", offset: [10, 0], className: "rotulo-mapa" })
+      const linha = PONTOS.map((p) => [p.lat, p.lng] as [number, number])
+      L.polyline(linha, { color: "#ffffff", weight: 9, opacity: 0.8 }).addTo(mapa)
+      L.polyline(linha, { color: "#520e1f", weight: 5, dashArray: "10 8", lineCap: "round" }).addTo(mapa)
+      PONTOS.forEach((p) => {
+        const icone = L.divIcon({ className: "", html: `<span class="pino-mapa">${p.n}</span>`, iconSize: [34, 34], iconAnchor: [17, 17] })
+        L.marker([p.lat, p.lng], { icon: icone, title: p.nome })
+          .addTo(mapa!)
+          .bindPopup(
+            `<div class="popup-agora"><span class="ano">${p.ano}</span><strong>${p.n}. ${p.nome}</strong><p>${p.texto}</p>${p.aprox ? '<em>Localização aproximada.</em>' : ""}</div>`,
+            { maxWidth: 260 }
+          )
+      })
+      const largo = ref.current.clientWidth > 520
+      mapa.fitBounds(L.latLngBounds(linha), { paddingTopLeft: [largo ? 250 : 30, 80], paddingBottomRight: [40, 40] })
+      obs = new ResizeObserver(() => mapa?.invalidateSize())
+      obs.observe(ref.current)
     })
     return () => {
       cancelado = true
+      obs?.disconnect()
       mapa?.remove()
     }
   }, [])
-  return <div ref={ref} className="w-full h-full" aria-label="Mapa atual do centro do Recife" />
+  return <div ref={ref} className="w-full h-full" aria-label="Mapa do centro do Recife com os lugares históricos da pesquisa" />
 }
 
 export default function MapaAgora() {
@@ -92,12 +116,38 @@ export default function MapaAgora() {
             )}
           </div>
           <div className="relative">
-            <div className="relative h-[460px] md:h-[560px] rounded-3xl overflow-hidden bg-sand-beige border-4 border-white/10 shadow-2xl">
+            <div className="relative h-[520px] md:h-[600px] rounded-3xl overflow-hidden bg-sand-beige border-4 border-white/10 shadow-2xl">
               <MapaReal />
-              <div className="pointer-events-none absolute top-4 right-4 z-[500] px-4 py-2 rounded-full bg-soil-brown/90 text-white text-sm shadow">
-                <i className="fas fa-layer-group text-sky mr-2"></i>Centro do Recife hoje
+              <div className="pointer-events-none absolute top-3 right-3 z-[500] flex items-center gap-2 pl-2 pr-4 py-2 rounded-2xl bg-white/95 shadow-lg">
+                <img src={asset("/logos/ciencia-na-rua.jpg")} alt="" className="h-9 rounded-lg" />
+                <div className="leading-tight">
+                  <div className="font-poppins font-bold text-soil-brown text-sm">MAPA <span className="text-tech-teal">ÁGORA</span></div>
+                  <div className="text-[11px] text-text-secondary">Do Marco Zero a São José</div>
+                </div>
+              </div>
+              <div className="hidden sm:block absolute bottom-8 left-3 z-[500] w-56 max-w-[70%] rounded-2xl bg-white/95 shadow-lg p-3 text-soil-brown">
+                <div className="font-poppins font-bold text-xs tracking-wide mb-2 flex items-center gap-2">
+                  <span className="inline-block w-6 border-t-[3px] border-dashed border-tech-teal"></span>Percurso da pesquisa
+                </div>
+                <ol className="space-y-1 text-[11px] sm:text-xs">
+                  {PONTOS.map((p) => (
+                    <li key={p.n} className="flex items-center gap-2">
+                      <span className="w-5 h-5 shrink-0 rounded-full bg-tech-teal text-white text-[10px] font-bold flex items-center justify-center">{p.n}</span>
+                      <span className="truncate">{p.nome}</span>
+                    </li>
+                  ))}
+                </ol>
               </div>
             </div>
+            <ol className="sm:hidden mt-4 grid grid-cols-1 gap-1 text-sm text-sand-beige">
+              {PONTOS.map((p) => (
+                <li key={p.n} className="flex items-center gap-2">
+                  <span className="w-6 h-6 shrink-0 rounded-full bg-tech-teal text-white text-xs font-bold flex items-center justify-center border-2 border-white">{p.n}</span>
+                  {p.nome}
+                </li>
+              ))}
+            </ol>
+            <p className="mt-3 text-center text-sand-beige/70 text-xs">Toque nos números para ler a história de cada lugar.</p>
           </div>
         </div>
       </div>
