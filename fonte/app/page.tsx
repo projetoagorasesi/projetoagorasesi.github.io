@@ -17,7 +17,116 @@ import { REFERENCIAS, IMAGENS, ATUALIZACOES, INTEGRANTES, ARTIGOS } from "@/lib/
 import type { Referencia, Imagem, Atualizacao, Integrante, Artigo } from "@/lib/tipos"
 
 /** Pares de imagens "antes e depois" (ver a matéria do G1). Cada item: lugar, antes, depois, rótulos e crédito. */
-const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes: string; rotuloDepois: string; credito: string }[] = []
+const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes: string; rotuloDepois: string; credito: string; proporcao: number }[] = [
+ {
+  "lugar": "Marco Zero (Praça Rio Branco), Bairro do Recife",
+  "antes": "/antesdepois/marco-zero_antes.jpg",
+  "depois": "/antesdepois/marco-zero_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 1.779
+ },
+ {
+  "lugar": "Rua do Bom Jesus (antiga Rua da Cruz), Bairro do Recife",
+  "antes": "/antesdepois/rua-do-bom-jesus_antes.jpg",
+  "depois": "/antesdepois/rua-do-bom-jesus_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 1.779
+ },
+ {
+  "lugar": "Cais do porto, Bairro do Recife",
+  "antes": "/antesdepois/porto_antes.jpg",
+  "depois": "/antesdepois/porto_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 2.809
+ },
+ {
+  "lugar": "Ponte Maurício de Nassau",
+  "antes": "/antesdepois/mauricio-de-nassau_antes.jpg",
+  "depois": "/antesdepois/mauricio-de-nassau_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 1.316
+ },
+ {
+  "lugar": "Avenida Dantas Barreto",
+  "antes": "/antesdepois/dantas-barreto_antes.jpg",
+  "depois": "/antesdepois/dantas-barreto_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 1.961
+ },
+ {
+  "lugar": "Rua da Aurora, às margens do Capibaribe",
+  "antes": "/antesdepois/rua-da-aurora_antes.jpg",
+  "depois": "/antesdepois/rua-da-aurora_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 2.262
+ },
+ {
+  "lugar": "Entorno do Cinema São Luiz, vista da ponte",
+  "antes": "/antesdepois/sao-luiz_antes.jpg",
+  "depois": "/antesdepois/sao-luiz_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 1.379
+ },
+ {
+  "lugar": "Avenida Conde da Boa Vista",
+  "antes": "/antesdepois/conde-da-boa-vista_antes.jpg",
+  "depois": "/antesdepois/conde-da-boa-vista_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 1.996
+ },
+ {
+  "lugar": "Praça do centro do Recife",
+  "antes": "/antesdepois/praca-monumento_antes.jpg",
+  "depois": "/antesdepois/praca-monumento_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 1.575
+ },
+ {
+  "lugar": "Praça com trilhos de bonde, centro do Recife",
+  "antes": "/antesdepois/praca-bondes_antes.jpg",
+  "depois": "/antesdepois/praca-bondes_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 1.779
+ },
+ {
+  "lugar": "Rua com bondes, centro do Recife",
+  "antes": "/antesdepois/rua-trilhos_antes.jpg",
+  "depois": "/antesdepois/rua-trilhos_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 1.779
+ },
+ {
+  "lugar": "Rua comercial do centro do Recife",
+  "antes": "/antesdepois/rua-comercio_antes.jpg",
+  "depois": "/antesdepois/rua-comercio_depois.jpg",
+  "rotuloAntes": "Antes",
+  "rotuloDepois": "Hoje",
+  "credito": "Imagens: reprodução g1 / Bom Dia PE",
+  "proporcao": 1.808
+ }
+]
 
 const EIXOS = [
   {
@@ -192,11 +301,11 @@ export default function Inicio() {
             )}
           </div>
           {ANTES_DEPOIS.length > 0 && (
-            <div className="grid gap-12 mb-14">
+            <div className="grid lg:grid-cols-2 gap-10 mb-14">
               {ANTES_DEPOIS.map((p) => (
                 <figure key={p.lugar}>
-                  <AntesDepois antes={asset(p.antes)} depois={asset(p.depois)} rotuloAntes={p.rotuloAntes} rotuloDepois={p.rotuloDepois} />
-                  <figcaption className="mt-4 text-center text-sand-beige text-sm">
+                  <AntesDepois antes={asset(p.antes)} depois={asset(p.depois)} rotuloAntes={p.rotuloAntes} rotuloDepois={p.rotuloDepois} proporcao={p.proporcao} />
+                  <figcaption className="mt-3 text-center text-sand-beige text-sm">
                     <strong className="text-white">{p.lugar}</strong> · {p.credito}
                   </figcaption>
                 </figure>
