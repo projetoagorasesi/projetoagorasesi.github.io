@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import "leaflet/dist/leaflet.css"
+import "maplibre-gl/dist/maplibre-gl.css"
+import { ESTILO_MAPA } from "@/lib/estiloMapa"
 import { MAPA_AGORA_URL } from "@/lib/config"
 import { asset } from "@/lib/util"
 
@@ -24,41 +25,49 @@ const PONTOS: Ponto[] = [
   { n: 7, nome: "Avenida Dantas Barreto", ano: "séc. XX", lat: -8.06741, lng: -34.87933, texto: "Sua abertura demoliu casarios e a Igreja dos Martírios, mudando o traçado de Santo Antônio e São José." },
 ]
 
-/** Arte do Mapa Ágora sobre o mapa real e atual do centro do Recife (OpenStreetMap). */
+/** Arte do Mapa Ágora: mapa desenhado com estilo próprio (MapLibre + OpenFreeMap) e os pontos da pesquisa. */
 function MapaReal() {
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    let mapa: import("leaflet").Map | null = null
-    let obs: ResizeObserver | null = null
+    let mapa: import("maplibre-gl").Map | null = null
     let cancelado = false
-    import("leaflet").then((L) => {
+    import("maplibre-gl").then(({ default: maplibregl }) => {
       if (cancelado || !ref.current) return
-      mapa = L.map(ref.current, { scrollWheelZoom: false, zoomControl: true })
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        className: "mapa-antigo",
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">colaboradores do OpenStreetMap</a>',
-      }).addTo(mapa)
-      const linha = PONTOS.map((p) => [p.lat, p.lng] as [number, number])
-      L.polyline(linha, { color: "#ffffff", weight: 9, opacity: 0.8 }).addTo(mapa)
-      L.polyline(linha, { color: "#520e1f", weight: 5, dashArray: "10 8", lineCap: "round" }).addTo(mapa)
-      PONTOS.forEach((p) => {
-        const icone = L.divIcon({ className: "", html: `<span class="pino-mapa">${p.n}</span>`, iconSize: [34, 34], iconAnchor: [17, 17] })
-        L.marker([p.lat, p.lng], { icon: icone, title: p.nome })
-          .addTo(mapa!)
-          .bindPopup(
-            `<div class="popup-agora"><span class="ano">${p.ano}</span><strong>${p.n}. ${p.nome}</strong><p>${p.texto}</p>${p.aprox ? '<em>Localização aproximada.</em>' : ""}</div>`,
-            { maxWidth: 260 }
-          )
-      })
+      const linha = PONTOS.map((p) => [p.lng, p.lat] as [number, number])
+      const limites = linha.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(linha[0], linha[0]))
       const largo = ref.current.clientWidth > 520
-      mapa.fitBounds(L.latLngBounds(linha), { paddingTopLeft: [largo ? 250 : 30, 80], paddingBottomRight: [40, 40] })
-      obs = new ResizeObserver(() => mapa?.invalidateSize())
-      obs.observe(ref.current)
+      mapa = new maplibregl.Map({
+        container: ref.current,
+        style: ESTILO_MAPA,
+        bounds: limites,
+        fitBoundsOptions: { padding: { top: 90, bottom: 50, left: largo ? 260 : 40, right: 50 } },
+        scrollZoom: false,
+        dragRotate: false,
+        pitchWithRotate: false,
+        attributionControl: { compact: true },
+      })
+      mapa.touchZoomRotate.disableRotation()
+      mapa.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-left")
+      mapa.on("load", () => {
+        if (!mapa) return
+        mapa.addSource("percurso", { type: "geojson", data: { type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: linha } } })
+        mapa.addLayer({ id: "percurso-borda", type: "line", source: "percurso", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": 9 } })
+        mapa.addLayer({ id: "percurso", type: "line", source: "percurso", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#8cb13b", "line-width": 5, "line-dasharray": [2, 1.5] } })
+      })
+      PONTOS.forEach((p) => {
+        const el = document.createElement("button")
+        el.className = "pino-mapa"
+        el.type = "button"
+        el.textContent = String(p.n)
+        el.setAttribute("aria-label", p.nome)
+        const popup = new maplibregl.Popup({ offset: 20, maxWidth: "260px" }).setHTML(
+          `<div class="popup-agora"><span class="ano">${p.ano}</span><strong>${p.n}. ${p.nome}</strong><p>${p.texto}</p>${p.aprox ? "<em>Localização aproximada.</em>" : ""}</div>`
+        )
+        new maplibregl.Marker({ element: el }).setLngLat([p.lng, p.lat]).setPopup(popup).addTo(mapa!)
+      })
     })
     return () => {
       cancelado = true
-      obs?.disconnect()
       mapa?.remove()
     }
   }, [])
@@ -75,7 +84,7 @@ export default function MapaAgora() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="flex flex-wrap items-center gap-4 mb-6">
-              <img src={asset("/logos/ciencia-na-rua.jpg")} alt="SESI Ciência na Rua" className="h-16 sm:h-20 rounded-2xl shadow-lg" />
+              <img src={asset("/logos/ciencia-na-rua.png")} alt="SESI Ciência na Rua" className="h-16 sm:h-20 rounded-2xl shadow-lg" />
               <span className="selo bg-aged-copper/20 border border-aged-copper/40 text-aged-copper">
                 <i className="fas fa-map-location-dot mr-2"></i>MAPA ÁGORA
               </span>
@@ -119,7 +128,7 @@ export default function MapaAgora() {
             <div className="relative h-[520px] md:h-[600px] rounded-3xl overflow-hidden bg-sand-beige border-4 border-white/10 shadow-2xl">
               <MapaReal />
               <div className="pointer-events-none absolute top-3 right-3 z-[500] flex items-center gap-2 pl-2 pr-4 py-2 rounded-2xl bg-white/95 shadow-lg">
-                <img src={asset("/logos/ciencia-na-rua.jpg")} alt="" className="h-9 rounded-lg" />
+                <img src={asset("/logos/ciencia-na-rua.png")} alt="" className="h-9 rounded-lg" />
                 <div className="leading-tight">
                   <div className="font-poppins font-bold text-soil-brown text-sm">MAPA <span className="text-tech-teal">ÁGORA</span></div>
                   <div className="text-[11px] text-text-secondary">Do Marco Zero a São José</div>
@@ -127,7 +136,7 @@ export default function MapaAgora() {
               </div>
               <div className="hidden sm:block absolute bottom-8 left-3 z-[500] w-56 max-w-[70%] rounded-2xl bg-white/95 shadow-lg p-3 text-soil-brown">
                 <div className="font-poppins font-bold text-xs tracking-wide mb-2 flex items-center gap-2">
-                  <span className="inline-block w-6 border-t-[3px] border-dashed border-tech-teal"></span>Percurso da pesquisa
+                  <span className="inline-block w-6 border-t-[3px] border-dashed border-[#8cb13b]"></span>Percurso da pesquisa
                 </div>
                 <ol className="space-y-1 text-[11px] sm:text-xs">
                   {PONTOS.map((p) => (
