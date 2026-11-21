@@ -599,7 +599,7 @@ export const INTEGRANTES: Integrante[] = [
  {
   "id": "int-orientador-2",
   "nome": "Prof. Me. Anderson Leonardo de Almeida Serafim",
-  "funcao": "Orientador",
+  "funcao": "Coorientador",
   "descricao": "",
   "foto_url": null,
   "grupo": "orientador",
