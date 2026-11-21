@@ -20,12 +20,12 @@ import type { Referencia, Imagem, Atualizacao, Integrante, Artigo } from "@/lib/
 const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes: string; rotuloDepois: string; credito: string; resumo: string; proporcao: number }[] = [
  {
   "lugar": "Marco Zero (Praça Rio Branco)",
-  "antes": "/antesdepois/marco-zero_antes-v2.jpg",
-  "depois": "/antesdepois/marco-zero_hoje-v3.jpg",
+  "antes": "/antesdepois/marco-zero_antes-v3.jpg",
+  "depois": "/antesdepois/marco-zero_hoje-v4.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
   "credito": "Foto 1 (1951): Arquivo · Foto 2: autoria a confirmar",
-  "proporcao": 2.067
+  "proporcao": 1.778,
   "resumo": "Construído em 1938 na antiga área do Cais da Lingueta; a rosa dos ventos no centro da praça é de 1999."
  },
  {
