@@ -51,8 +51,8 @@ function MapaReal() {
       mapa.on("load", () => {
         if (!mapa) return
         mapa.addSource("percurso", { type: "geojson", data: { type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: linha } } })
-        mapa.addLayer({ id: "percurso-borda", type: "line", source: "percurso", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": 9 } })
-        mapa.addLayer({ id: "percurso", type: "line", source: "percurso", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#8cb13b", "line-width": 5, "line-dasharray": [2, 1.5] } })
+        mapa.addLayer({ id: "percurso-borda", type: "line", source: "percurso", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": 9, "line-opacity": 0.9 } })
+        mapa.addLayer({ id: "percurso", type: "line", source: "percurso", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#83ab56", "line-width": 5, "line-dasharray": [2, 1.5] } })
       })
       PONTOS.forEach((p) => {
         const el = document.createElement("button")
@@ -125,23 +125,23 @@ export default function MapaAgora() {
             )}
           </div>
           <div className="relative">
-            <div className="relative h-[520px] md:h-[600px] rounded-3xl overflow-hidden bg-sand-beige border-4 border-white/10 shadow-2xl">
+            <div className="relative h-[520px] md:h-[600px] rounded-3xl overflow-hidden bg-[#2b438b] border-4 border-white/20 shadow-2xl">
               <MapaReal />
               <div className="pointer-events-none absolute top-3 right-3 z-[500] flex items-center gap-2 pl-2 pr-4 py-2 rounded-2xl bg-white/95 shadow-lg">
                 <img src={asset("/logos/ciencia-na-rua.png")} alt="" className="h-9 rounded-lg" />
                 <div className="leading-tight">
-                  <div className="font-poppins font-bold text-soil-brown text-sm">MAPA <span className="text-tech-teal">ÁGORA</span></div>
+                  <div className="font-poppins font-bold text-soil-brown text-sm"><span className="text-[#2b438b]">MAPA</span> <span className="text-[#83ab56]">ÁGORA</span></div>
                   <div className="text-[11px] text-text-secondary">Do Marco Zero a São José</div>
                 </div>
               </div>
               <div className="hidden sm:block absolute bottom-8 left-3 z-[500] w-56 max-w-[70%] rounded-2xl bg-white/95 shadow-lg p-3 text-soil-brown">
                 <div className="font-poppins font-bold text-xs tracking-wide mb-2 flex items-center gap-2">
-                  <span className="inline-block w-6 border-t-[3px] border-dashed border-[#8cb13b]"></span>Percurso da pesquisa
+                  <span className="inline-block w-6 border-t-[3px] border-dashed border-[#83ab56]"></span>Percurso da pesquisa
                 </div>
                 <ol className="space-y-1 text-[11px] sm:text-xs">
                   {PONTOS.map((p) => (
                     <li key={p.n} className="flex items-center gap-2">
-                      <span className="w-5 h-5 shrink-0 rounded-full bg-tech-teal text-white text-[10px] font-bold flex items-center justify-center">{p.n}</span>
+                      <span className="w-5 h-5 shrink-0 rounded-full bg-[#83ab56] text-white text-[10px] font-bold flex items-center justify-center">{p.n}</span>
                       <span className="truncate">{p.nome}</span>
                     </li>
                   ))}
@@ -151,7 +151,7 @@ export default function MapaAgora() {
             <ol className="sm:hidden mt-4 grid grid-cols-1 gap-1 text-sm text-sand-beige">
               {PONTOS.map((p) => (
                 <li key={p.n} className="flex items-center gap-2">
-                  <span className="w-6 h-6 shrink-0 rounded-full bg-tech-teal text-white text-xs font-bold flex items-center justify-center border-2 border-white">{p.n}</span>
+                  <span className="w-6 h-6 shrink-0 rounded-full bg-[#83ab56] text-white text-xs font-bold flex items-center justify-center border-2 border-white">{p.n}</span>
                   {p.nome}
                 </li>
               ))}

@@ -33,8 +33,8 @@ const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes:
   "depois": "/antesdepois/rua-do-bom-jesus_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 1.779
+  "credito": "Antes: G. Gaensly e R. Lindemann (acervo IMS). Hoje: foto de Ferreira",
+  "proporcao": 1.347
  },
  {
   "lugar": "Cais do porto, Bairro do Recife",

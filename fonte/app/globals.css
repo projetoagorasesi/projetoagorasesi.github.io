@@ -62,10 +62,10 @@
 [class*="bg-soil-brown"] .text-tech-teal, [class*="from-soil-brown"] .text-tech-teal { color: var(--aged-copper); }
 
 .btn-sky { @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-aged-copper text-white rounded-full font-semibold hover:opacity-90 transition; }
-.pino-mapa { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 999px; background: #520e1f; color: #fff; font: 700 14px Poppins, sans-serif; border: 3px solid #fff; box-shadow: 0 3px 8px rgb(0 0 0 / 0.35); cursor: pointer; }
+.pino-mapa { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 999px; background: #83ab56; color: #fff; font: 700 14px Poppins, sans-serif; border: 3px solid #fff; box-shadow: 0 3px 8px rgb(0 0 0 / 0.35); cursor: pointer; }
 .popup-agora { font-family: Inter, sans-serif; color: #2e2a24; }
-.popup-agora .ano { display: inline-block; margin-bottom: 4px; padding: 1px 8px; border-radius: 999px; background: #a67c52; color: #fff; font-size: 11px; font-weight: 700; }
-.popup-agora strong { display: block; font-family: Poppins, sans-serif; font-size: 14px; color: #520e1f; }
+.popup-agora .ano { display: inline-block; margin-bottom: 4px; padding: 1px 8px; border-radius: 999px; background: #83ab56; color: #fff; font-size: 11px; font-weight: 700; }
+.popup-agora strong { display: block; font-family: Poppins, sans-serif; font-size: 14px; color: #2b438b; }
 .popup-agora p { margin: 4px 0 0; font-size: 12px; line-height: 1.45; }
 .popup-agora em { display: block; margin-top: 4px; font-size: 11px; color: #6b7280; }
 .maplibregl-popup-content { border-radius: 14px; padding: 12px 14px; box-shadow: 0 8px 24px rgb(0 0 0 / 0.18); }
