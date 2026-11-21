@@ -40,45 +40,6 @@ const EIXOS = [
   },
 ]
 
-const RECURSOS = [
-  {
-    href: "/pesquisas/#artigos",
-    icone: "fa-file-lines",
-    cor: "from-tech-teal to-tech-teal/70",
-    link: "text-tech-teal",
-    titulo: "Nossos artigos",
-    texto: "Os textos escritos pela equipe: artigo científico, diário de bordo e banner do projeto.",
-    acao: "Ler artigos",
-  },
-  {
-    href: "/referencias/",
-    icone: "fa-book-open",
-    cor: "from-aged-copper to-aged-copper/70",
-    link: "text-aged-copper",
-    titulo: "Referências",
-    texto: "Os livros, teses e artigos em que nos baseamos, em ABNT e com link para a fonte original.",
-    acao: "Ver referências",
-  },
-  {
-    href: "/galeria/",
-    icone: "fa-images",
-    cor: "from-aged-copper to-aged-copper/70",
-    link: "text-aged-copper",
-    titulo: "Galeria",
-    texto: "Fotografias, gravuras e cartões-postais do bairro, sempre com autor, data e acervo.",
-    acao: "Explorar galeria",
-  },
-  {
-    href: "/diario/",
-    icone: "fa-route",
-    cor: "from-tech-teal to-tech-teal/70",
-    link: "text-tech-teal",
-    titulo: "Diário de ações",
-    texto: "Visitas a acervos, pesquisas, debates e eventos: acompanhe cada passo do grupo.",
-    acao: "Acompanhar",
-  },
-]
-
 export default function Inicio() {
   const pesquisas = usePesquisas()
   const refs = useColecao<Referencia>("referencias", REFERENCIAS, porOrdem)
@@ -254,41 +215,6 @@ export default function Inicio() {
             <a href={MATERIA_G1.url} target="_blank" rel="noopener noreferrer" className="btn-copper shrink-0">
               Ler no G1 <i className="fas fa-arrow-up-right-from-square"></i>
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Recursos */}
-      <section className="py-24 bg-gradient-to-br from-sand-beige to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-16">
-            <Selo cor="copper">O QUE VOCÊ ENCONTRA AQUI</Selo>
-            <h2 className="font-poppins font-bold text-4xl md:text-5xl text-soil-brown mb-6 text-balance">
-              Leia, explore, acompanhe
-            </h2>
-            <p className="text-xl text-text-secondary max-w-3xl mx-auto text-pretty">
-              Tudo o que a equipe produziu e consultou, aberto para quem quiser conhecer a história do centro do Recife.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {RECURSOS.map((r) => (
-              <Link
-                key={r.href}
-                href={r.href}
-                className="group cartao p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-              >
-                <div
-                  className={`w-16 h-16 bg-gradient-to-br ${r.cor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                >
-                  <i className={`fas ${r.icone} text-white text-2xl`}></i>
-                </div>
-                <h3 className="font-poppins font-bold text-2xl text-soil-brown mb-4">{r.titulo}</h3>
-                <p className="text-text-secondary mb-6 leading-relaxed">{r.texto}</p>
-                <span className={`inline-flex items-center ${r.link} font-semibold gap-2 group-hover:gap-3 transition-all`}>
-                  {r.acao} <i className="fas fa-arrow-right"></i>
-                </span>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
