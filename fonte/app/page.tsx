@@ -17,33 +17,36 @@ import { REFERENCIAS, IMAGENS, ATUALIZACOES, INTEGRANTES, ARTIGOS } from "@/lib/
 import type { Referencia, Imagem, Atualizacao, Integrante, Artigo } from "@/lib/tipos"
 
 /** Pares de imagens "antes e depois" (ver a matéria do G1). Cada item: lugar, antes, depois, rótulos e crédito. */
-const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes: string; rotuloDepois: string; credito: string; proporcao: number }[] = [
+const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes: string; rotuloDepois: string; credito: string; resumo: string; proporcao: number }[] = [
  {
-  "lugar": "Marco Zero (Praça Rio Branco), Bairro do Recife",
+  "lugar": "Marco Zero (Praça Rio Branco), 1951 e 2023",
   "antes": "/antesdepois/marco-zero_antes.jpg",
   "depois": "/antesdepois/marco-zero_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 1.779
+  "credito": "Foto 1: Arquivo · Foto 2: Reprodução/TV Globo",
+  "proporcao": 1.779,
+  "resumo": "Construído em 1938 na antiga área do Cais da Lingueta; a rosa dos ventos no centro da praça é de 1999."
  },
  {
-  "lugar": "Rua do Bom Jesus (antiga Rua da Cruz), Bairro do Recife",
+  "lugar": "Rua do Bom Jesus e Torre Malakoff",
   "antes": "/antesdepois/rua-do-bom-jesus_antes.jpg",
   "depois": "/antesdepois/rua-do-bom-jesus_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Antes: G. Gaensly e R. Lindemann (acervo IMS). Hoje: foto de Ferreira",
-  "proporcao": 1.347
+  "credito": "Antes: G. Gaensly e R. Lindemann (acervo IMS) · Hoje: Ferreira",
+  "proporcao": 1.347,
+  "resumo": "Antiga Rua dos Judeus, no Bairro do Recife; ao fundo, a Torre Malakoff, observatório e portão do antigo Arsenal da Marinha."
  },
  {
-  "lugar": "Cais do porto, Bairro do Recife",
+  "lugar": "Porto do Recife",
   "antes": "/antesdepois/porto_antes.jpg",
   "depois": "/antesdepois/porto_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 2.809
+  "credito": "Foto 1: Acervo · Foto 2: Reprodução/TV Globo",
+  "proporcao": 2.809,
+  "resumo": "Em 1911 o porto passou por uma grande reforma: aterros avançaram sobre a água e ampliaram o cais."
  },
  {
   "lugar": "Ponte Maurício de Nassau",
@@ -51,8 +54,9 @@ const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes:
   "depois": "/antesdepois/mauricio-de-nassau_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 1.316
+  "credito": "Foto 1: Acervo · Foto 2: Reprodução/Google Maps",
+  "proporcao": 1.316,
+  "resumo": "Antes chamada Ponte Sete de Setembro e usada pelos bondes; em 1940 ganhou as estátuas das cabeceiras e o nome atual."
  },
  {
   "lugar": "Avenida Dantas Barreto",
@@ -60,26 +64,29 @@ const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes:
   "depois": "/antesdepois/dantas-barreto_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 1.961
+  "credito": "Foto 1: Acervo · Foto 2: Reprodução/TV Globo",
+  "proporcao": 1.961,
+  "resumo": "Aberta a partir dos anos 1970 entre Santo Antônio e São José: 11 ruas e cerca de 400 casarões desapareceram. Inaugurada em 1973."
  },
  {
-  "lugar": "Rua da Aurora, às margens do Capibaribe",
+  "lugar": "Rua da Aurora",
   "antes": "/antesdepois/rua-da-aurora_antes.jpg",
   "depois": "/antesdepois/rua-da-aurora_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 2.262
+  "credito": "Foto 1: Acervo · Foto 2: Reprodução/TV Globo",
+  "proporcao": 2.262,
+  "resumo": "Às margens do Capibaribe, perdeu muitos prédios na modernização, mas conserva trechos intactos perto da Rua Princesa Isabel."
  },
  {
-  "lugar": "Entorno do Cinema São Luiz, vista da ponte",
+  "lugar": "Ponte Duarte Coelho",
   "antes": "/antesdepois/sao-luiz_antes.jpg",
   "depois": "/antesdepois/sao-luiz_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 1.379
+  "credito": "Foto 1: Acervo · Foto 2: TV Globo",
+  "proporcao": 1.379,
+  "resumo": "Ergueu-se no lugar da antiga Ponte da Maxambomba, desmontada em 1915; ao fundo, o Cinema São Luiz."
  },
  {
   "lugar": "Avenida Conde da Boa Vista",
@@ -87,46 +94,52 @@ const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes:
   "depois": "/antesdepois/conde-da-boa-vista_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 1.996
+  "credito": "Foto 1: Acervo · Foto 2: Reprodução/TV Globo",
+  "proporcao": 1.996,
+  "resumo": "Era a estreita Rua Formosa; recebeu o nome atual em 1870 e virou avenida após sucessivos alargamentos. Pavimentada em 1956."
  },
  {
-  "lugar": "Praça do centro do Recife",
+  "lugar": "Grande Hotel, Avenida Martins de Barros",
   "antes": "/antesdepois/praca-monumento_antes.jpg",
   "depois": "/antesdepois/praca-monumento_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 1.575
+  "credito": "Foto 1: Arquivo · Foto 2: Reprodução/TV Globo",
+  "proporcao": 1.575,
+  "resumo": "Inaugurado em 1938 e desativado em 1992; hoje abriga o Fórum Thomaz de Aquino. O Monumento aos Aviadores foi levado para a praça ao lado."
  },
  {
-  "lugar": "Praça com trilhos de bonde, centro do Recife",
+  "lugar": "Praça Maciel Pinheiro, Boa Vista",
   "antes": "/antesdepois/praca-bondes_antes.jpg",
   "depois": "/antesdepois/praca-bondes_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 1.779
+  "credito": "Foto 1: Fundação Joaquim Nabuco · Foto 2: Reprodução/TV Globo",
+  "proporcao": 1.779,
+  "resumo": "Inaugurada em 1876, já foi cercada por grades e teve outros nomes, como Largo do Aterro e Largo da Boa Vista."
  },
  {
-  "lugar": "Rua com bondes, centro do Recife",
+  "lugar": "Rua Nova",
   "antes": "/antesdepois/rua-trilhos_antes.jpg",
   "depois": "/antesdepois/rua-trilhos_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 1.779
+  "credito": "Foto 1: Acervo · Foto 2: Reprodução/TV Globo",
+  "proporcao": 1.779,
+  "resumo": "Aberta no século XVIII onde ficava a Casa da Pólvora; já se chamou Rua Barão da Vitória e, por alguns anos, Rua João Pessoa."
  },
  {
-  "lugar": "Rua comercial do centro do Recife",
+  "lugar": "Rua da Imperatriz",
   "antes": "/antesdepois/rua-comercio_antes.jpg",
   "depois": "/antesdepois/rua-comercio_depois.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
-  "credito": "Imagens: reprodução g1 / Bom Dia PE",
-  "proporcao": 1.808
+  "credito": "Foto 1: Acervo · Foto 2: TV Globo",
+  "proporcao": 1.808,
+  "resumo": "Rua de sobrados nobres entre os séculos XIX e XX; antes chamada Rosa e Silva, mudou de nome após a visita da imperatriz Teresa Cristina."
  }
 ]
+
 
 const EIXOS = [
   {
@@ -305,8 +318,10 @@ export default function Inicio() {
               {ANTES_DEPOIS.map((p) => (
                 <figure key={p.lugar}>
                   <AntesDepois antes={asset(p.antes)} depois={asset(p.depois)} rotuloAntes={p.rotuloAntes} rotuloDepois={p.rotuloDepois} proporcao={p.proporcao} />
-                  <figcaption className="mt-3 text-center text-sand-beige text-sm">
-                    <strong className="text-white">{p.lugar}</strong> · {p.credito}
+                  <figcaption className="mt-3 text-center text-sm">
+                    <strong className="block text-white font-poppins text-base">{p.lugar}</strong>
+                    <span className="block text-sand-beige mt-1">{p.resumo}</span>
+                    <span className="block text-sand-beige/60 text-xs mt-1">{p.credito}</span>
                   </figcaption>
                 </figure>
               ))}

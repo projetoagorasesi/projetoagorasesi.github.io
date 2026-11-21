@@ -1,6 +1,6 @@
 :HL["/_next/static/chunks/3bamziuwsepqy.css","style"]
-:HL["/_next/static/chunks/23kvu_ty47nuw.css","style"]
+:HL["/_next/static/chunks/3ftv7ro8z7lnd.css","style"]
 :HC["/",""]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"artigos","h":96,"c":"$Q2"}]]
-0:{"b":"feb-T9WveS80_B_-MPpW2","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"0ndN7Gv9PjKiC3UKXZCTu","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
