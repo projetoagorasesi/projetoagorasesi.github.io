@@ -21,7 +21,7 @@ const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes:
  {
   "lugar": "Marco Zero (Praça Rio Branco)",
   "antes": "/antesdepois/marco-zero_antes.jpg",
-  "depois": "/antesdepois/marco-zero_depois.jpg",
+  "depois": "/antesdepois/marco-zero_hoje-v2.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
   "credito": "Foto 1 (1951): Arquivo · Foto 2: autoria a confirmar",
