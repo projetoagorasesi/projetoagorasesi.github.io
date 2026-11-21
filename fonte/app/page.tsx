@@ -20,8 +20,8 @@ import type { Referencia, Imagem, Atualizacao, Integrante, Artigo } from "@/lib/
 const ANTES_DEPOIS: { lugar: string; antes: string; depois: string; rotuloAntes: string; rotuloDepois: string; credito: string; resumo: string; proporcao: number }[] = [
  {
   "lugar": "Marco Zero (Praça Rio Branco)",
-  "antes": "/antesdepois/marco-zero_antes-v3.jpg",
-  "depois": "/antesdepois/marco-zero_hoje-v4.jpg",
+  "antes": "/antesdepois/marco-zero_antes-v4.jpg",
+  "depois": "/antesdepois/marco-zero_hoje-v5.jpg",
   "rotuloAntes": "Antes",
   "rotuloDepois": "Hoje",
   "credito": "Foto 1 (1951): Arquivo · Foto 2: autoria a confirmar",
