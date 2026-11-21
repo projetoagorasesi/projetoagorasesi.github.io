@@ -2,14 +2,14 @@ import { asset } from "@/lib/util"
 
 /** Para mostrar a logo oficial, coloque o arquivo em public/logos/ e informe o nome em "logo". */
 const PARCEIROS: { nome: string; sigla: string; icone: string; logo?: string }[] = [
-  { nome: "Museu do Estado de Pernambuco", sigla: "MEPE", icone: "fa-building-columns" },
-  { nome: "Instituto Ricardo Brennand", sigla: "IRB", icone: "fa-chess-rook" },
-  { nome: "Fundação Joaquim Nabuco", sigla: "Fundaj", icone: "fa-landmark" },
-  { nome: "Villa Digital da Fundaj", sigla: "Villa Digital", icone: "fa-photo-film" },
-  { nome: "Universidade Federal de Pernambuco", sigla: "UFPE", icone: "fa-graduation-cap" },
-  { nome: "Universidade Federal Rural de Pernambuco", sigla: "UFRPE", icone: "fa-seedling" },
-  { nome: "Arquivo Público Estadual Jordão Emerenciano", sigla: "APEJE", icone: "fa-box-archive" },
-  { nome: "Universidade Católica de Pernambuco", sigla: "UNICAP", icone: "fa-book" },
+  { nome: "Museu do Estado de Pernambuco", sigla: "MEPE", logo: "mepe.png", icone: "fa-building-columns" },
+  { nome: "Instituto Ricardo Brennand", sigla: "IRB", logo: "irb.png", icone: "fa-chess-rook" },
+  { nome: "Fundação Joaquim Nabuco", sigla: "Fundaj", logo: "fundaj.png", icone: "fa-landmark" },
+  { nome: "Villa Digital da Fundaj", sigla: "Villa Digital", logo: "villa-digital.png", icone: "fa-photo-film" },
+  { nome: "Universidade Federal de Pernambuco", sigla: "UFPE", logo: "ufpe.png", icone: "fa-graduation-cap" },
+  { nome: "Universidade Federal Rural de Pernambuco", sigla: "UFRPE", logo: "ufrpe.png", icone: "fa-seedling" },
+  { nome: "Arquivo Público Estadual Jordão Emerenciano", sigla: "APEJE", logo: "apeje.png", icone: "fa-box-archive" },
+  { nome: "Universidade Católica de Pernambuco", sigla: "UNICAP", logo: "unicap.png", icone: "fa-book" },
 ]
 
 export default function Parcerias() {
@@ -29,7 +29,7 @@ export default function Parcerias() {
           {PARCEIROS.map((p) => (
             <div key={p.nome} className="group cartao p-5 sm:p-6 text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
               {p.logo ? (
-                <img src={asset(`/logos/${p.logo}`)} alt={`Logo: ${p.nome}`} className="h-16 mx-auto mb-4 object-contain group-hover:scale-105 transition-transform" />
+                <img src={asset(`/logos/${p.logo}`)} alt={`Logo: ${p.nome}`} className="h-24 max-w-full mx-auto mb-4 object-contain rounded-lg group-hover:scale-105 transition-transform" />
               ) : (
                 <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-aged-copper/15 to-tech-teal/15 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <i className={`fas ${p.icone} text-xl text-aged-copper`}></i>

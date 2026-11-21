@@ -1,6 +1,6 @@
 :HL["/_next/static/chunks/3bamziuwsepqy.css","style"]
-:HL["/_next/static/chunks/3ftv7ro8z7lnd.css","style"]
+:HL["/_next/static/chunks/3bldwkt6bnbbc.css","style"]
 :HC["/",""]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"referencias","h":96,"c":"$Q2"}]]
-0:{"b":"7rRlt8Bh_7PZn8ZN04-YS","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"SZRCPjIOEmzh8LVXMQv1I","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
