@@ -185,9 +185,11 @@ export default function Inicio() {
             <h2 className="font-poppins font-bold text-4xl md:text-5xl text-white mt-6 mb-4 text-balance">
               O Recife do século XX e o de agora
             </h2>
-            <p className="text-lg text-sand-beige max-w-2xl mx-auto">
-              Arraste a barra para comparar a mesma paisagem em dois tempos.
-            </p>
+            {ANTES_DEPOIS.length > 0 && (
+              <p className="text-lg text-sand-beige max-w-2xl mx-auto">
+                Arraste a barra para comparar a mesma paisagem em dois tempos.
+              </p>
+            )}
           </div>
           {ANTES_DEPOIS.length > 0 && (
             <div className="grid gap-12 mb-14">
