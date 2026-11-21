@@ -3,9 +3,9 @@ import { asset } from "@/lib/util"
 /** Para mostrar a logo oficial, coloque o arquivo em public/logos/ e informe o nome em "logo". */
 const PARCEIROS: { nome: string; sigla: string; icone: string; logo?: string }[] = [
   { nome: "Museu do Estado de Pernambuco", sigla: "MEPE", logo: "mepe.png", icone: "fa-building-columns" },
-  { nome: "Instituto Ricardo Brennand", sigla: "IRB", logo: "irb.png", icone: "fa-chess-rook" },
-  { nome: "Fundação Joaquim Nabuco", sigla: "Fundaj", logo: "fundaj.png", icone: "fa-landmark" },
-  { nome: "Villa Digital da Fundaj", sigla: "Villa Digital", logo: "villa-digital.png", icone: "fa-photo-film" },
+  { nome: "Instituto Ricardo Brennand", sigla: "IRB", logo: "irb-v2.png", icone: "fa-chess-rook" },
+  { nome: "Fundação Joaquim Nabuco", sigla: "Fundaj", logo: "fundaj-v2.png", icone: "fa-landmark" },
+  { nome: "Villa Digital da Fundaj", sigla: "Villa Digital", logo: "villa-digital-v2.png", icone: "fa-photo-film" },
   { nome: "Universidade Federal de Pernambuco", sigla: "UFPE", logo: "ufpe.png", icone: "fa-graduation-cap" },
   { nome: "Universidade Federal Rural de Pernambuco", sigla: "UFRPE", logo: "ufrpe.png", icone: "fa-seedling" },
   { nome: "Arquivo Público Estadual Jordão Emerenciano", sigla: "APEJE", logo: "apeje.png", icone: "fa-box-archive" },
