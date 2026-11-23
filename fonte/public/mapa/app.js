@@ -731,10 +731,12 @@ $("#btnEncerrar").onclick = () => terminar(false)
 function trocarAba(a) {
   document.querySelectorAll(".abas button").forEach((b) => b.setAttribute("aria-selected", b.dataset.aba === a))
   $("#pagVideo").hidden = a !== "video"; $("#pagDicas").hidden = a !== "dicas"; $("#pagModerar").hidden = a !== "moderar"
+  document.body.classList.toggle("em-pagina", a !== "mapa")
   if (a === "video") montarVideo()
   if (a === "dicas") montarDicas()
   if (a === "moderar") montarModeracao()
 }
+document.querySelectorAll("[data-voltar]").forEach((b) => (b.onclick = () => trocarAba("mapa")))
 document.querySelector(".abas").onclick = (e) => { const b = e.target.closest("button"); if (b) trocarAba(b.dataset.aba) }
 function idYoutube(url) { const m = String(url || "").match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/); return m ? m[1] : null }
 function montarVideo() {

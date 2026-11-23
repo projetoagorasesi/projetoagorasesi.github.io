@@ -220,6 +220,9 @@ h1,h2,h3{font-family:var(--f-titulo);line-height:1.08;text-wrap:balance;margin:0
 
 /* páginas */
 .pagina{position:fixed;inset:0;z-index:15;overflow-y:auto;background:var(--fundo);padding:calc(86px + var(--topo)) max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px));animation:troca .45s ease both}
+body.em-pagina .topo{z-index:20}
+.voltar-mapa{display:flex;width:max-content;margin:0 auto 18px;max-width:860px;color:var(--azul)}
+@media (min-width:900px){.voltar-mapa{margin-left:calc(50% - 430px)}}
 .pag-wrap{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
 .pag-wrap h2{font-size:clamp(1.9rem,5vw,2.6rem);color:var(--azul)}
 .pag-wrap>p{margin:0;font-size:1.1rem;line-height:1.6;color:var(--tinta2);max-width:62ch}
