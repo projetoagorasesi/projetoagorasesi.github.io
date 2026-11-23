@@ -111,7 +111,7 @@ const SECOES: Secao[] = [
       { k: "autores", rotulo: "Autores", tipo: "texto", obrigatorio: true },
       { k: "publicado_em", rotulo: "Data", tipo: "data" },
       { k: "resumo", rotulo: "Resumo", tipo: "area" },
-      { k: "arquivo_url", rotulo: "Arquivo (PDF)", tipo: "arquivo", dica: "Prefira PDF. Até uns 15 MB." },
+      { k: "arquivo_url", rotulo: "Arquivo (PDF ou Word)", tipo: "arquivo", dica: "PDF ou Word (.docx). Abre numa janela dentro do site. Até uns 15 MB." },
       { k: "capa_url", rotulo: "Imagem de capa (opcional)", tipo: "imagem" },
     ],
   },

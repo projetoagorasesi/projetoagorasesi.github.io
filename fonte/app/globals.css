@@ -69,3 +69,7 @@
 .popup-agora p { margin: 4px 0 0; font-size: 12px; line-height: 1.45; }
 .popup-agora em { display: block; margin-top: 4px; font-size: 11px; color: #6b7280; }
 .maplibregl-popup-content { border-radius: 14px; padding: 12px 14px; box-shadow: 0 8px 24px rgb(0 0 0 / 0.18); }
+
+/* Leitor de arquivos (Word) dentro do site */
+.leitor-docx .docx-wrapper { background: transparent !important; padding: 0 !important; }
+.leitor-docx .docx-wrapper > section.docx { margin: 0 auto 1rem !important; box-shadow: 0 10px 30px rgb(0 0 0 / 0.35) !important; }
