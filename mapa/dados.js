@@ -162,7 +162,7 @@ export const PARADAS = [
     ],
   },
   {
-    id: "cp", n: 15, t: 3, aprox: true, ll: [-8.0748, -34.8795], nome: "Forte das Cinco Pontas",
+    id: "cp", n: 15, t: 3, ll: [-8.0720, -34.8806], nome: "Forte das Cinco Pontas",
     texto: "O forte foi construído pelos holandeses com cinco pontas. Depois, os portugueses o reconstruíram com quatro, mas o nome ficou! Hoje ele abriga o Museu da Cidade do Recife.",
     sabia: "Os holandeses chamavam o forte de Frederik Hendrik. Do alto das muralhas, os soldados vigiavam a entrada da cidade pelo sul.",
     info: "O Museu da Cidade fecha às segundas e às terças.",

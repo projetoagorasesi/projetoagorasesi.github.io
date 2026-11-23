@@ -32,8 +32,8 @@ export const ESTILO_MAPA = {
   layers: [
     { id: "fundo", type: "background", paint: { "background-color": COR.terra } },
     { id: "uso-urbano", type: "fill", source: "omt", "source-layer": "landuse", filter: ["in", ["get", "class"], ["literal", ["residential", "commercial", "retail", "industrial"]]], paint: { "fill-color": COR.quadra } },
-    { id: "verde", type: "fill", source: "omt", "source-layer": "park", paint: { "fill-color": COR.verde, "fill-opacity": 0.55 } },
-    { id: "verde-cobertura", type: "fill", source: "omt", "source-layer": "landcover", filter: ["in", ["get", "class"], ["literal", ["grass", "wood"]]], paint: { "fill-color": COR.verde, "fill-opacity": 0.4 } },
+    { id: "verde", type: "fill", source: "omt", "source-layer": "park", minzoom: 13, paint: { "fill-color": COR.verde, "fill-opacity": 0.55 } },
+    { id: "verde-cobertura", type: "fill", source: "omt", "source-layer": "landcover", minzoom: 14, filter: ["in", ["get", "class"], ["literal", ["grass", "wood"]]], paint: { "fill-color": COR.verde, "fill-opacity": 0.4 } },
     { id: "agua", type: "fill", source: "omt", "source-layer": "water", paint: { "fill-color": COR.agua } },
     { id: "rios", type: "line", source: "omt", "source-layer": "waterway", paint: { "line-color": COR.agua, "line-width": 2 } },
     { id: "predios", type: "fill", source: "omt", "source-layer": "building", minzoom: 14, paint: { "fill-color": COR.predio, "fill-outline-color": COR.predioBorda, "fill-opacity": 0.85 } },

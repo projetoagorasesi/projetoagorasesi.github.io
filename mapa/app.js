@@ -174,11 +174,15 @@ const vazio = { type: "FeatureCollection", features: [] }
 const fonte = (id) => mapa.getSource(id) || { setData() {} } // não quebra se o mapa ainda não carregou
 mapa.once("style.load", () => {
   mapa.addSource("intro", { type: "geojson", data: vazio })
+  mapa.addSource("mascara", { type: "geojson", data: vazio })
+  // escurece tudo o que fica fora do lugar em destaque (Brasil, Pernambuco ou Recife)
+  mapa.addLayer({ id: "intro-mascara", type: "fill", source: "mascara", filter: ["==", ["get", "id"], ""], paint: { "fill-color": "#0d1a40", "fill-opacity": 0, "fill-opacity-transition": { duration: 900 } } })
   mapa.addLayer({ id: "intro-brasil", type: "fill", source: "intro", filter: ["==", ["get", "id"], "brasil"], paint: { "fill-color": "#ffffff", "fill-opacity": 0, "fill-opacity-transition": { duration: 900 } } })
   mapa.addLayer({ id: "intro-estados", type: "line", source: "intro", filter: ["==", ["get", "id"], "estados"], paint: { "line-color": "#ffffff", "line-width": 1, "line-opacity": 0, "line-opacity-transition": { duration: 900 } } })
   mapa.addLayer({ id: "intro-pe", type: "fill", source: "intro", filter: ["==", ["get", "id"], "pe"], paint: { "fill-color": "#83ab56", "fill-opacity": 0, "fill-opacity-transition": { duration: 900 } } })
   mapa.addLayer({ id: "intro-pe-borda", type: "line", source: "intro", filter: ["==", ["get", "id"], "pe"], paint: { "line-color": "#e9f5dc", "line-width": 2, "line-opacity": 0, "line-opacity-transition": { duration: 900 } } })
-  mapa.addLayer({ id: "intro-recife", type: "line", source: "intro", filter: ["==", ["get", "id"], "recife"], paint: { "line-color": "#ffffff", "line-width": 3.5, "line-dasharray": [2, 1.2], "line-opacity": 0, "line-opacity-transition": { duration: 900 } } })
+  mapa.addLayer({ id: "intro-recife-fundo", type: "fill", source: "intro", filter: ["==", ["get", "id"], "recife"], paint: { "fill-color": "#ffffff", "fill-opacity": 0, "fill-opacity-transition": { duration: 900 } } })
+  mapa.addLayer({ id: "intro-recife", type: "line", source: "intro", filter: ["==", ["get", "id"], "recife"], paint: { "line-color": "#ffffff", "line-width": 4, "line-opacity": 0, "line-opacity-transition": { duration: 900 } } })
 
   mapa.addSource("percurso", { type: "geojson", data: vazio })
   mapa.addLayer({ id: "percurso-borda", type: "line", source: "percurso", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": 8, "line-opacity": ["case", ["get", "ativo"], 0.85, 0.25] } })
@@ -187,7 +191,7 @@ mapa.once("style.load", () => {
   mapa.addLayer({ id: "guia-borda", type: "line", source: "guia", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#ffffff", "line-width": ["interpolate", ["linear"], ["zoom"], 13, 7, 18, 16] } })
   mapa.addLayer({ id: "guia", type: "line", source: "guia", layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": "#2f8cff", "line-width": ["interpolate", ["linear"], ["zoom"], 13, 4.5, 18, 11] } })
   mapaPronto = true
-  fetch("geo-intro.json").then((r) => r.json()).then((g) => fonte("intro").setData(g)).catch(() => {})
+  fetch("geo-intro.json").then((r) => r.json()).then((g) => { g = semBuracos(g); fonte("intro").setData(g); fonte("mascara").setData(mascaras(g)) }).catch(() => {})
   desenharPercursoReto()
   calcularPercursos()
 })
@@ -283,13 +287,37 @@ let introPasso = 0
 function setIntro(i) {
   if (!mapaPronto) return
   const op = (id, prop, v) => mapa.setPaintProperty(id, prop, v)
-  op("intro-brasil", "fill-opacity", i === 0 ? 0.18 : i >= 1 ? 0.06 : 0)
-  op("intro-estados", "line-opacity", i >= 0 && i < 2 ? 0.5 : 0)
-  op("intro-pe", "fill-opacity", i === 0 ? 0.9 : i === 1 ? 0.55 : i === 2 ? 0.12 : 0)
-  op("intro-pe-borda", "line-opacity", i >= 0 && i < 2 ? 1 : 0)
+  // durante a introdução o verde de parques e matas some, para só o lugar em destaque chamar atenção
+  ;["verde", "verde-cobertura"].forEach((l) => mapa.getLayer(l) && mapa.setLayoutProperty(l, "visibility", i >= 0 ? "none" : "visible"))
+  mapa.setFilter("intro-mascara", ["==", ["get", "id"], ["brasil", "pe", "recife"][i] || ""])
+  op("intro-mascara", "fill-opacity", i >= 0 ? 0.62 : 0)
+  op("intro-brasil", "fill-opacity", 0)
+  op("intro-estados", "line-opacity", i === 0 ? 0.45 : i === 1 ? 0.25 : 0)
+  op("intro-pe", "fill-opacity", i === 0 ? 0.95 : i === 1 ? 0.12 : 0)
+  op("intro-pe-borda", "line-opacity", i === 0 || i === 1 ? 1 : 0)
+  op("intro-recife-fundo", "fill-opacity", i === 2 ? 0.1 : 0)
   op("intro-recife", "line-opacity", i === 2 ? 1 : 0)
   ;["percurso", "percurso-borda"].forEach((l) => mapa.setLayoutProperty(l, "visibility", i >= 0 && i < 2 ? "none" : "visible"))
   mostrarMarcadores(i < 0 || i === 2)
+}
+/** Tira pequenas falhas internas dos contornos (sobras da junção dos municípios). */
+function semBuracos(g) {
+  g.features.forEach((f) => {
+    if (f.geometry.type === "Polygon") f.geometry.coordinates = [f.geometry.coordinates[0]]
+    else if (f.geometry.type === "MultiPolygon") f.geometry.coordinates = f.geometry.coordinates.map((p) => [p[0]])
+  })
+  return g
+}
+/** Máscaras: o mundo inteiro com um "buraco" no formato do lugar em destaque. */
+function mascaras(g) {
+  const mundo = [[-180, -85], [180, -85], [180, 85], [-180, 85], [-180, -85]]
+  const feats = ["brasil", "pe", "recife"].map((id) => {
+    const geo = g.features.find((f) => f.properties.id === id)?.geometry
+    if (!geo) return null
+    const polis = geo.type === "Polygon" ? [geo.coordinates] : geo.coordinates
+    return { type: "Feature", properties: { id }, geometry: { type: "Polygon", coordinates: [mundo, ...polis.map((p) => p[0])] } }
+  }).filter(Boolean)
+  return { type: "FeatureCollection", features: feats }
 }
 function passoIntro(i) {
   introPasso = i
