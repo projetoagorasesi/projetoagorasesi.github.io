@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mapa Ágora · Recife antigo</title>
+<meta name="description" content="Passeio guiado pelo Recife antigo, do Marco Zero à Casa da Cultura: a pé, de bicicleta, de carro ou na sala de aula. SESI Ciência na Rua.">
+<meta name="theme-color" content="#21418A">
+<meta property="og:title" content="Mapa Ágora · Recife antigo">
+<meta property="og:description" content="Um passeio guiado pelo GPS pelo centro histórico do Recife.">
+<meta property="og:image" content="../og-agora-v1.jpg">
+<link rel="icon" href="../favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="mapa.css">
+</head>
+<body>
+<div id="mapa" aria-label="Mapa do centro histórico do Recife"></div>
+
+<!-- 1. Abertura -->
+<section class="tela" id="abertura" aria-label="Abertura">
+  <div class="orbita"><i style="width:140vmax;height:56vmax;--r:-18deg"></i><i style="width:120vmax;height:44vmax;--r:28deg"></i></div>
+  <div class="ab-centro">
+    <div class="logo-cartao"><img src="../logos/ciencia-na-rua.png" alt="SESI Ciência na Rua"></div>
+    <h1 class="ab-titulo">MAPA <span>ÁGORA</span></h1>
+    <p class="ab-sub">Um passeio pelo Recife antigo: a pé, de bicicleta, de carro ou na sala de aula.</p>
+    <button class="btn" id="btnComecar">Começar o passeio</button>
+    <button class="lnk" id="btnPular">Pular a introdução</button>
+  </div>
+</section>
+
+<!-- 2. Intro Brasil > PE > Recife (o próprio mapa voa) -->
+<section class="tela sai" id="intro" aria-label="Introdução" hidden>
+  <div class="selo-marca"><img src="../logos/ciencia-na-rua.png" alt="SESI Ciência na Rua"><b>MAPA <span>ÁGORA</span></b></div>
+  <div class="intro-cartao" id="introCartao" aria-live="polite">
+    <div class="etapa" id="introEtapa"></div>
+    <h2 id="introTitulo"></h2>
+    <p id="introTexto"></p>
+    <div class="acoes">
+      <div class="pontos" id="introPontos"><b></b><b></b><b></b></div>
+      <div class="linha-acoes" style="gap:8px">
+        <button class="lnk" id="introVoltar">Voltar</button>
+        <button class="btn" id="introSeguir">Seguir</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Escolha -->
+<section class="tela sai" id="escolha" aria-label="Como você quer passear?" hidden>
+  <div class="esc-wrap">
+    <h2>Como você quer conhecer o Recife?</h2>
+    <p>Escolha um jeito de passear. Você pode encerrar quando quiser.</p>
+    <div class="modos" id="modos"></div>
+    <div class="aviso" id="avisoModo"></div>
+    <div id="blocoGuia">
+      <h3 style="margin-bottom:12px">Você está no Recife agora?</h3>
+      <div class="opcoes duas" id="guias"></div>
+    </div>
+    <div id="blocoTrecho">
+      <h3 style="margin-bottom:12px">Qual caminho?</h3>
+      <div class="opcoes" id="trechos"></div>
+    </div>
+    <div class="linha-acoes">
+      <button class="btn" id="btnIniciar">Iniciar</button>
+      <button class="lnk" id="btnRever">Rever a introdução</button>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Interface do mapa -->
+<div id="ui" hidden>
+  <div class="topo">
+    <button class="marca" id="btnMarca" title="Voltar ao início"><img src="../logos/ciencia-na-rua.png" alt="SESI Ciência na Rua"><b>MAPA <span>ÁGORA</span></b></button>
+    <div class="abas" role="tablist">
+      <button role="tab" aria-selected="true" data-aba="mapa">Mapa</button>
+      <button role="tab" aria-selected="false" data-aba="video">Vídeo 3D</button>
+      <button role="tab" aria-selected="false" data-aba="dicas">Dicas</button>
+    </div>
+    <div class="espaco"></div>
+    <button class="encerrar" id="btnEncerrar">Encerrar</button>
+  </div>
+
+  <div class="ctrl" id="ctrl">
+    <button id="zMais" aria-label="Aproximar">+</button>
+    <button id="zMenos" aria-label="Afastar">−</button>
+    <button id="zTudo" aria-label="Ver o percurso inteiro" title="Ver o percurso inteiro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    <button id="zTela" aria-label="Tela cheia" title="Tela cheia (lousa digital)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg></button>
+  </div>
+
+  <div class="legenda" id="legenda"></div>
+
+  <!-- navegação GPS -->
+  <div class="nav-topo" id="navTopo" hidden aria-live="polite">
+    <div class="nav-seta"><svg id="navSeta" viewBox="0 0 40 40"><path d="M20 4 L32 22 H24 V36 H16 V22 H8 Z" fill="#fff"/></svg></div>
+    <div class="nav-txt">
+      <div class="nav-dist" id="navDist">–</div>
+      <div class="nav-instr" id="navInstr">Procurando o seu sinal de GPS…</div>
+      <div class="nav-depois" id="navDepois"></div>
+    </div>
+    <button class="nav-som" id="navSom" aria-pressed="true" aria-label="Voz ligada" title="Voz das instruções"></button>
+  </div>
+  <div class="nav-baixo" id="navBaixo" hidden>
+    <div class="nav-prox"><small id="navRotulo">Próxima parada</small><strong id="navNome">–</strong><span id="navResta"></span></div>
+    <div class="nav-btns">
+      <button class="btn fino" id="navVer" style="color:var(--azul)">Ver história</button>
+      <button class="btn fino" id="navPular" style="color:var(--tinta2)">Pular</button>
+    </div>
+  </div>
+  <button class="btn azul recentrar" id="btnRecentrar" hidden>Voltar para a minha posição</button>
+
+  <aside class="lista fechado" id="lista" aria-label="Lista de lugares">
+    <header>
+      <div class="linha-acoes" style="justify-content:space-between"><h3>Lugares do mapa</h3><button class="lnk" id="listaFechar">Fechar</button></div>
+      <div class="filtros" id="filtros"></div>
+    </header>
+    <ol id="listaItens"></ol>
+  </aside>
+  <button class="btn azul chip-baixo" id="btnLista" hidden>Ver lista de lugares</button>
+
+  <aside class="painel fechado" id="painel" aria-live="polite">
+    <div class="rolagem" id="painelRolagem">
+      <button class="fechar" id="pFechar" aria-label="Fechar">×</button>
+      <div class="galeria" id="pGaleria"></div>
+      <div class="conteudo">
+        <div class="etiquetas" id="pTags"></div>
+        <h3 id="pTitulo"></h3>
+        <p id="pTexto"></p>
+        <div class="sabia" id="pSabia"></div>
+        <div id="pInfo"></div>
+      </div>
+    </div>
+    <div class="painel-rodape" id="pRodape">
+      <button class="btn fino" id="pAnt" style="color:var(--azul);flex:0 0 auto">‹ Voltar</button>
+      <span class="passo" id="pPasso"></span>
+      <button class="btn" id="pProx">Próxima parada ›</button>
+    </div>
+  </aside>
+
+  <div class="pagina" id="pagVideo" hidden>
+    <div class="pag-wrap">
+      <h2>O Recife de antigamente, em 3D</h2>
+      <p>Como era a cidade quando os navios ancoravam no Poço, as pontes tinham arcos e as igrejas que hoje não existem ainda estavam de pé? Este vídeo mostra o Recife antigo ganhando vida.</p>
+      <div class="video-caixa" id="videoCaixa"></div>
+      <p style="font-size:.95rem">Dica para professores: assista com a turma antes do passeio e peça para procurarem, durante o trajeto, os lugares que aparecem no vídeo.</p>
+    </div>
+  </div>
+  <div class="pagina" id="pagDicas" hidden><div class="pag-wrap" id="dicasWrap"></div></div>
+  <div class="pagina" id="pagModerar" hidden><div class="pag-wrap" id="modWrap"></div></div>
+</div>
+
+<!-- 5. Final -->
+<section class="tela sai" id="final" aria-label="Fim do passeio" hidden>
+  <div class="confete" id="confete"></div>
+  <div class="fim-wrap">
+    <div class="logo-cartao"><img src="../logos/ciencia-na-rua.png" alt="SESI Ciência na Rua"></div>
+    <h2 id="fimTitulo">Que passeio!</h2>
+    <p id="fimTexto"></p>
+    <div class="placar" id="placar"></div>
+    <div class="visitados" id="visitados"></div>
+    <div class="linha-acoes" style="justify-content:center">
+      <button class="btn" id="fimMapa">Explorar o mapa</button>
+      <button class="btn claro" id="fimRecomecar">Recomeçar</button>
+    </div>
+    <p style="font-size:.9rem;opacity:.75">Mapa Ágora · Escola SESI Ibura · SESI Ciência na Rua</p>
+  </div>
+</section>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
