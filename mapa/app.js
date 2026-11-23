@@ -239,8 +239,12 @@ function montarMarcadores() {
     el.setAttribute("aria-label", p.nome)
     el.dataset.id = p.id
     el.addEventListener("click", (e) => { e.stopPropagation(); clicarParada(p.id) })
-    marcadores[p.id] = new maplibregl.Marker({ element: el }).setLngLat(LL(p)).addTo(mapa)
-    el.setAttribute("aria-label", p.nome) // o MapLibre troca por "Map marker"
+    // O MapLibre posiciona o marcador mexendo no "transform" do elemento. Por isso a animação
+    // (aumentar ao passar o mouse, destacar a parada) fica num botão DENTRO de uma caixa fixa;
+    // se ficasse no próprio marcador, ele escorregaria atrás do mapa ao arrastar.
+    const caixa = document.createElement("div"); caixa.className = "pino-ancora"; caixa.appendChild(el)
+    marcadores[p.id] = new maplibregl.Marker({ element: caixa }).setLngLat(LL(p)).addTo(mapa)
+    caixa.removeAttribute("aria-label"); caixa.removeAttribute("role")
   })
   estacionamentos.forEach((m) => m.remove()); estacionamentos.length = 0
   if (S.modo === "carro" && S.emRota) ESTACIONAMENTOS.forEach((e) => {
@@ -252,7 +256,7 @@ function montarMarcadores() {
 const estacionamentos = []
 function atualizarMarcadores(ativo) {
   PARADAS.forEach((p) => {
-    const el = marcadores[p.id]?.getElement(); if (!el) return
+    const el = marcadores[p.id]?.getElement()?.firstElementChild; if (!el) return
     el.classList.toggle("visto", S.visitados.has(p.id))
     el.classList.toggle("ativo", p.id === ativo)
     const naRota = !S.emRota || S.seq.includes(p.id)
@@ -825,7 +829,8 @@ function desenharModeracao(m) {
   modMapa?.remove()
   modMapa = new maplibregl.Map({ container: "mMapa", style: ESTILO_MAPA, center: [ll[1], ll[0]], zoom: 17, attributionControl: false })
   const el = document.createElement("div"); el.className = "pino" + (p.perdido ? " perdido" : ""); el.style.background = TRECHOS[p.t].cor; el.textContent = p.n || "†"
-  const mk = new maplibregl.Marker({ element: el, draggable: true }).setLngLat([ll[1], ll[0]]).addTo(modMapa)
+  const caixa = document.createElement("div"); caixa.className = "pino-ancora"; caixa.appendChild(el)
+  const mk = new maplibregl.Marker({ element: caixa, draggable: true }).setLngLat([ll[1], ll[0]]).addTo(modMapa)
   mk.on("dragend", () => { const c = mk.getLngLat(); ll = [+c.lat.toFixed(6), +c.lng.toFixed(6)]; $("#mLL").textContent = `${ll[0].toFixed(5)}, ${ll[1].toFixed(5)}` })
   $("#modForm").onsubmit = async (e) => {
     e.preventDefault()

@@ -113,8 +113,12 @@ h1,h2,h3{font-family:var(--f-titulo);line-height:1.08;text-wrap:balance;margin:0
 .ctrl svg{width:22px;height:22px}
 
 /* marcadores */
+/* reserva caso o CSS do MapLibre não carregue: marcadores ancorados no canto do mapa e movidos só por transform */
+.maplibregl-marker{position:absolute;top:0;left:0;will-change:transform}
+.pino-ancora{width:34px;height:34px;display:grid;place-items:center}
 .pino{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 14px var(--f-titulo);border:3px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.35);cursor:pointer;padding:0;transition:transform .2s}
 .pino:hover{transform:scale(1.12)}
+.pino-ancora .pino{pointer-events:auto}
 .pino.perdido{background:#fff!important;color:var(--fantasma);border:2.5px dashed var(--fantasma);width:30px;height:30px}
 .pino.visto{opacity:.75}
 .pino.ativo{transform:scale(1.25);box-shadow:0 0 0 6px rgba(255,255,255,.35),0 3px 10px rgba(0,0,0,.4)}
