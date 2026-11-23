@@ -98,7 +98,7 @@ h1,h2,h3{font-family:var(--f-titulo);line-height:1.08;text-wrap:balance;margin:0
 .topo{position:fixed;left:0;right:0;top:0;z-index:10;display:flex;align-items:center;gap:10px;padding:calc(10px + var(--topo)) var(--dir) 10px var(--esq);pointer-events:none;flex-wrap:wrap}
 .topo>*{pointer-events:auto}
 .marca{background:#fff;border-radius:14px;padding:6px 10px;box-shadow:var(--sombra);display:flex;align-items:center;gap:10px;border:0}
-.marca img{height:30px;width:auto;display:block}
+.marca img{height:30px;width:55px;object-fit:contain;overflow:hidden;display:block}
 .marca b{font-family:var(--f-titulo);color:var(--azul);font-size:1.1rem;line-height:1}
 .marca b span{color:var(--verde)}
 @media (max-width:560px){.marca b{display:none}}
