@@ -351,22 +351,22 @@ function Gerenciador({ secao, autor, pesquisas }: { secao: Secao; autor: string;
           )}
         </div>
       ) : (
-        <div className="grid gap-3">
+        <div className="grid grid-cols-1 gap-3 min-w-0">
           {itens.map((x) => (
-            <div key={x.id} className="cartao p-4 flex items-center gap-4">
+            <div key={x.id} className="cartao p-4 flex items-center gap-3 sm:gap-4 min-w-0 w-full">
               {secao.imagem && (
                 <div className="w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-sand-beige/50">
                   {secao.imagem(x) && <ArquivoImg src={secao.imagem(x)} alt="" className="w-full h-full object-cover" />}
                 </div>
               )}
               <div className="min-w-0 flex-1">
-                <p className="font-semibold truncate">{secao.titulo(x)}</p>
+                <p className="font-semibold line-clamp-2 break-words">{secao.titulo(x)}</p>
                 <p className="text-sm text-text-muted truncate">{secao.subtitulo(x)}</p>
               </div>
-              <button className="w-10 h-10 rounded-full hover:bg-sand-beige/60" title="Editar" onClick={() => setEditando(x)}>
-                <i className="fas fa-pen text-tech-teal"></i>
+              <button className="shrink-0 h-10 px-3 sm:px-4 rounded-full border border-tech-teal/30 text-tech-teal font-semibold hover:bg-tech-teal/10" title="Editar" onClick={() => setEditando(x)}>
+                <i className="fas fa-pen"></i><span className="hidden sm:inline ml-2">Editar</span>
               </button>
-              <button className="w-10 h-10 rounded-full hover:bg-red-50" title="Apagar" onClick={() => apagar(x)}>
+              <button className="shrink-0 w-10 h-10 rounded-full hover:bg-red-50" title="Apagar" onClick={() => apagar(x)}>
                 <i className="fas fa-trash text-danger"></i>
               </button>
             </div>
