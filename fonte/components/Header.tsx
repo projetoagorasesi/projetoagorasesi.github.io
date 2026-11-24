@@ -45,7 +45,7 @@ export default function Header({ pagina, transparente = false }: { pagina?: stri
           <div className="hidden xl:flex items-center gap-7">
             {LINKS.map((l) =>
               l.id === "mapa" ? (
-                <a key={l.id} href={asset(l.href)} className="transition-colors duration-300 font-medium text-white hover:text-aged-copper">
+                <a key={l.id} href={asset(l.href)} target="_blank" rel="noopener" className="transition-colors duration-300 font-medium text-white hover:text-aged-copper">
                   <i className="fas fa-map-location-dot text-aged-copper mr-1.5"></i>{l.rotulo}
                 </a>
               ) : (
@@ -80,7 +80,7 @@ export default function Header({ pagina, transparente = false }: { pagina?: stri
           <div className="xl:hidden mt-4 pb-2 grid gap-1">
             {[...LINKS, { href: "/contato/", rotulo: "Fale conosco", id: "contato" }].map((l) =>
               l.id === "mapa" ? (
-                <a key={l.id} href={asset(l.href)} className="px-4 py-3 rounded-xl font-medium text-white hover:bg-white/10">
+                <a key={l.id} href={asset(l.href)} target="_blank" rel="noopener" className="px-4 py-3 rounded-xl font-medium text-white hover:bg-white/10">
                   <i className="fas fa-map-location-dot text-aged-copper mr-2"></i>{l.rotulo}
                 </a>
               ) : (

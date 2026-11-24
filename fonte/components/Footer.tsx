@@ -17,7 +17,7 @@ export default function Footer() {
           <div>
             <h4 className="font-poppins font-semibold text-lg mb-4">Pesquisa</h4>
             <ul className="space-y-2 text-sand-beige text-sm">
-              <li><a href="/mapa/" className="hover:text-aged-copper transition-colors">Mapa Ágora</a></li>
+              <li><a href="/mapa/" target="_blank" rel="noopener" className="hover:text-aged-copper transition-colors">Mapa Ágora</a></li>
               <li><Link href="/pesquisas/" className="hover:text-aged-copper transition-colors">Pesquisas e artigos</Link></li>
               <li><Link href="/referencias/" className="hover:text-aged-copper transition-colors">Referências</Link></li>
               <li><Link href="/galeria/" className="hover:text-aged-copper transition-colors">Galeria de imagens</Link></li>
