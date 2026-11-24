@@ -25,6 +25,11 @@ export default function Parcerias() {
             Museus, arquivos, fundações e universidades que abriram seus acervos, receberam a equipe ou orientaram a pesquisa.
           </p>
         </div>
+        <div className="cartao max-w-xl mx-auto mb-8 sm:mb-10 p-8 sm:p-10 text-center border-2 border-tech-teal/20 shadow-xl">
+          <img src={asset("/logos/sesi.png")} alt="Logo: SESI, Serviço Social da Indústria" className="h-20 sm:h-24 max-w-full mx-auto mb-5 object-contain" />
+          <div className="font-poppins font-bold text-soil-brown text-xl leading-tight mb-1">SESI</div>
+          <div className="text-sm sm:text-base text-text-secondary">Serviço Social da Indústria · Escola SESI Ibura</div>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {PARCEIROS.map((p) => (
             <div key={p.nome} className="group cartao p-5 sm:p-6 text-center hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
