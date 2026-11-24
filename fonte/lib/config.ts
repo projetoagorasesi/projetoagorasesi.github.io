@@ -13,7 +13,7 @@ export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ""
 
 /** Endereço do site interativo "Mapa Ágora". Deixe vazio enquanto ele estiver fora do ar:
  *  o botão da página inicial aparece como "Em breve". Quando estiver no ar, cole o link aqui. */
-export const MAPA_AGORA_URL = ""
+export const MAPA_AGORA_URL = "/mapa/"
 
 /** Matéria do G1 que inspira a seção "antes e depois" da página inicial. */
 export const MATERIA_G1 = {

@@ -112,7 +112,7 @@ export default function MapaAgora() {
               ))}
             </div>
             {noAr ? (
-              <a href={MAPA_AGORA_URL} target="_blank" rel="noopener noreferrer" className="btn-sky text-lg px-8 py-4 shadow-lg hover:scale-105">
+              <a href={asset(MAPA_AGORA_URL)} className="btn-sky text-lg px-8 py-4 shadow-lg hover:scale-105">
                 <i className="fas fa-compass"></i>Clique aqui e comece o passeio
               </a>
             ) : (
