@@ -383,12 +383,12 @@ export const IMAGENS: Imagem[] = [
  {
   "id": "img-09",
   "pesquisa": "santo-antonio",
-  "titulo": "Vista da Avenida Guararapes",
+  "titulo": "Vista da Avenida Martins de Barros",
   "autor": "Sérgio Benício Dias",
-  "ano": "1940",
+  "ano": "1950 (meados da década)",
   "acervo": "Fundação Joaquim Nabuco (acervo a confirmar)",
-  "categoria": "Reforma urbana",
-  "legenda": "A avenida aberta no bairro de Santo Antônio, com prédios em estilo art déco.",
+  "categoria": "Depois de 1940",
+  "legenda": "A Avenida Martins de Barros, no bairro de Santo Antônio, em meados da década de 1950.",
   "url": "/galeria/09_Vista_Av_Guararapes_1940_Sergio_Benicio_Dias.jpg",
   "ordem": 9
  },
