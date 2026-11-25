@@ -122,7 +122,7 @@ export const PARADAS = [
     texto: "Repare nos prédios com linhas retas e enfeites geométricos: é o conjunto art déco, um estilo muito moderno nos anos 1930 e 1940. Aqui também está a Matriz de Santo Antônio.",
     sabia: "A Praça da Independência é conhecida como “Pracinha do Diario”, por causa do jornal que funcionava ali.",
     fotos: [
-      local("galeria/09_Vista_Av_Guararapes_1940_Sergio_Benicio_Dias.jpg", "Av. Guararapes, 1940 · Sérgio Benício Dias"),
+      local("galeria/10_Av_Guararapes_cartao_postal_1950_Josebias_Bandeira.jpg", "Av. Guararapes, cartão-postal de 1950 · Josebias Bandeira"),
       local("galeria/14_Av_Guararapes_2015_Carlos_Ezequiel.jpg", "Av. Guararapes, 2015 · Carlos Ezequiel"),
     ],
   },

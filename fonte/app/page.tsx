@@ -183,7 +183,7 @@ export default function Inicio() {
         <div className="absolute inset-0">
           <img
             src={asset("/galeria/09_Vista_Av_Guararapes_1940_Sergio_Benicio_Dias.jpg")}
-            alt="Vista da Avenida Guararapes em 1940, fotografia de Sérgio Benício Dias"
+            alt="Vista da Avenida Martins de Barros em meados da década de 1950, fotografia de Sérgio Benício Dias"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-soil-brown via-soil-brown/90 to-soil-brown/70"></div>

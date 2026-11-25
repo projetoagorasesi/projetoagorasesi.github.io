@@ -21,7 +21,7 @@ const PONTOS: Ponto[] = [
   { n: 3, nome: "Ponte Maurício de Nassau", ano: "séc. XVII", lat: -8.06377, lng: -34.87542, texto: "No lugar da primeira ponte do Recife, do tempo de Maurício de Nassau, ligando o Bairro do Recife a Santo Antônio." },
   { n: 4, nome: "Ponte Buarque de Macedo", ano: "1902", lat: -8.06198, lng: -34.87542, texto: "Outra ligação entre o porto e Santo Antônio, fotografada em 1902 por Ramiro M. Costa e Filhos." },
   { n: 5, nome: "Praça da República", ano: "séc. XIX", lat: -8.06039, lng: -34.87757, texto: "Centro do poder e da cultura em Santo Antônio, com o Palácio do Campo das Princesas e o Teatro de Santa Isabel." },
-  { n: 6, nome: "Avenida Guararapes", ano: "1940", lat: -8.06422, lng: -34.87965, texto: "Aberta nas reformas das décadas de 1930 e 1940. Em 1940 já exibia os novos edifícios (foto de Sérgio Benício Dias)." },
+  { n: 6, nome: "Avenida Guararapes", ano: "1940", lat: -8.06422, lng: -34.87965, texto: "Aberta nas reformas das décadas de 1930 e 1940." },
   { n: 7, nome: "Avenida Dantas Barreto", ano: "séc. XX", lat: -8.06741, lng: -34.87933, texto: "Sua abertura demoliu casarios e a Igreja dos Martírios, mudando o traçado de Santo Antônio e São José." },
 ]
 
